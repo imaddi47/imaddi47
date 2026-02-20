@@ -4,7 +4,7 @@
   
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=imaddi47&label=Profile%20views&color=0e75b6&style=flat" alt="imaddi47" /> </p>  
   
-- 💬 Ask me about **go, javascript, react and vue**  
+- 💬 Ask me about **bash, javascript, react and postgres**  
   
 - 📫 How to reach me **imaddi47@duck.com**  
   
