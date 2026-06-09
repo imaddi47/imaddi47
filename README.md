@@ -1,24 +1,45 @@
+# Ankit Kumar
 
-<h1 align="center">Hi 👋, I'm Ankit</h1>  
-<h3 align="center">A passionate software developer from India</h3>  
-  
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=imaddi47&label=Profile%20views&color=0e75b6&style=flat" alt="imaddi47" /> </p>  
-  
-- 💬 Ask me about **bash, javascript, react and postgres**  
-  
-- 📫 How to reach me **imaddi47@duck.com**  
-  
-<h3 align="left">Connect with me:</h3>  
-<p align="left">  
-<a href="https://linkedin.com/in/imaddi47" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="imaddi47" height="30" width="40" /></a>  
-<a href="https://medium.com/@imaddi47" target="blank"><img align="center" src="https://miro.medium.com/v2/5d8de952517e8160e40ef9841c781cdc14a5db313057fa3c3de41c6f5b494b19" alt="@imaddi47" height="30" width="40" /></a>  
-</p>  
-  
-<h3 align="left">Languages and Tools:</h3>  
-<p align="left"> <a href="https://www.cockroachlabs.com/product/cockroachdb/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/cockroachdb.svg" alt="cockroachdb" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://cloud.google.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://golang.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.rabbitmq.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/rabbitmq/rabbitmq-icon.svg" alt="rabbitMQ" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://reactnative.dev/" target="_blank" rel="noreferrer"> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </a> <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/> </a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="40" height="40"/> </a> </p>  
-  
+Infrastructure-minded builder shipping cloud tools, internal platforms, and local-first AI workflows.
 
+[GitHub](https://github.com/imaddi47) · [LinkedIn](https://linkedin.com/in/imaddi47) · [Medium](https://medium.com/@imaddi47) · [Email](mailto:imaddi47@duck.com)
 
-![](https://github-readme-stats.vercel.app/api?username=imaddi47&theme=default&hide_border=true&include_all_commits=false&count_private=true)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=imaddi47&theme=default&hide_border=true)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=imaddi47&theme=default&hide_border=true&include_all_commits=false&count_private=true&layout=compact)
+## What I Build
+
+I like the layer where product meets operations: AWS automation, VPN and SSM admin surfaces, self-hosted AI workflows, database tooling, and small systems that make repeated engineering work feel less fragile.
+
+Right now I am focused on:
+
+| Area | What that looks like |
+| --- | --- |
+| Cloud operations | AWS SSM tools, Drive to S3 migration flows, Terraform AWS environment structure |
+| Secure admin systems | OpenVPN control planes, audit logs, RBAC, PKI, encrypted key storage |
+| Local-first tools | localhost admin UIs, desktop assistants, self-hosted AI execution environments |
+| Developer platforms | database management, migration workflows, workflow automation, internal dashboards |
+
+## Featured Systems
+
+| System | Focus | Stack |
+| --- | --- | --- |
+| OpenVPN Manager | Full-stack admin UI and Go agent system for OpenVPN Community Edition: org users, PKI, agent enrollment, config sync, audit logs, RBAC, notifications, and client access controls. | Go, React, PostgreSQL, OpenVPN, nftables, WebSocket |
+| [AWS SSM Parameters UI](https://github.com/imaddi47/manage-aws-ssm-parameters) | Local-first Parameter Store manager with region discovery, audited reveal flow, passphrase-protected writes, SQLite audit log, and no decrypted value persistence. | React, Vite, Express, AWS SDK, SQLite |
+| [Google Drive to S3 Copier](https://github.com/imaddi47/copy-google-drive-to-aws-s3) | Dual-pane Google Drive and S3 transfer UI with OAuth, selectable uploads, rename support, NDJSON progress, and streaming multipart uploads. | JavaScript, AWS S3, Google Drive API |
+| Cloud IaC | Terraform AWS structure for single-account, multi-environment infrastructure with region-first layout and S3 native state locking. | Terraform, AWS, shell tooling |
+| Sidekick | Desktop assistant for meetings, coding, calls, docs, selected-screen context, local transcription, AI Q&A, summaries, and local memory. | Electron, React, Rust helpers, local RAG |
+| [Resume Optimizer](https://github.com/imaddi47/resume-optimizer) | Open-source AI resume tailoring service with FastAPI, Vue, Gemini, LaTeX, PostgreSQL, GCS, and payment flow. | FastAPI, Vue, Gemini, PostgreSQL |
+
+## Writing
+
+- [I Let an AI Code For Me in a Disposable Docker Box - And It Slapped](https://imaddi47.medium.com/i-let-an-ai-code-for-me-in-a-disposable-docker-box-and-it-slapped-dd42ccbd0dba)
+- [Docker Desktop Doesn't Know How to Wait - And It Almost Killed My Homelab](https://imaddi47.medium.com/docker-desktop-doesnt-know-how-to-wait-and-it-almost-killed-my-homelab-82f307eccae1)
+- [When Macau Went Dark: How a Blocked CDN IP Led Us to Build a Geographic DNS Failover](https://imaddi47.medium.com/when-macau-went-dark-how-a-blocked-cdn-ip-led-us-to-build-a-geographic-dns-failover-992c5e59a5fc)
+- [GitHub Actions Kept Failing Because of Cloudflare. Here's the Fix Nobody Talks About.](https://imaddi47.medium.com/github-actions-kept-failing-because-of-cloudflare-heres-the-fix-nobody-talks-about-1d2e824d7f44)
+- [Practical Guide to Database Migrations](https://imaddi47.medium.com/practical-guide-to-database-migrations-aee1180dcdf5)
+
+## Stack
+
+`AWS` · `Terraform` · `Docker` · `SSM` · `Cloudflare Tunnel` · `GitHub Actions` · `OpenVPN` · `nftables` · `Node.js` · `Express` · `FastAPI` · `Go` · `PostgreSQL` · `GraphQL` · `React` · `Vite` · `Vue` · `Tailwind` · `Three.js` · `Gemini` · `Codex` · `Claude Code` · `local RAG` · `PKI` · `RBAC` · `audit logs`
+
+## Portfolio
+
+The React portfolio lives in [`portfolio/`](./portfolio). It expands the README into a visual, case-study style site for infrastructure and operator-facing systems.
