@@ -1,19 +1,39 @@
 import { useEffect, useMemo, useState } from "react";
+import InfraScene from "./InfraScene";
 import { profile, secondarySystems, signals, skillGroups, systems, writings } from "./data";
 
+const trackerSections = [
+  { id: "top", label: "Boot" },
+  { id: "systems", label: "Systems" },
+  { id: "writing", label: "Field notes" },
+  { id: "stack", label: "Stack" },
+];
+
+const codeLines = [
+  "terraform plan -out infra.operator.tfplan",
+  "aws ssm get-parameters-by-path --with-decryption=false",
+  "openvpn-agent enroll --audit-stream websocket",
+  "codex run --sandbox disposable --ship-local-first",
+  "gh workflow run deploy-profile.yml --ref profile-update",
+];
+
 function App() {
-  const carouselSystems = useMemo(() => systems.slice(0, 4), []);
+  const featuredSystems = useMemo(() => systems.slice(0, 4), []);
   const [activeSystemIndex, setActiveSystemIndex] = useState(0);
-  const activeSystem = carouselSystems[activeSystemIndex];
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("top");
+  const activeSystem = featuredSystems[activeSystemIndex];
 
   useEffect(() => {
     const root = document.documentElement;
     const onScroll = () => {
-      const y = window.scrollY;
-      root.style.setProperty("--grid-y", `${Math.round(y * 0.08)}px`);
-      root.style.setProperty("--grid-x", `${Math.round(y * -0.04)}px`);
-      root.style.setProperty("--hero-copy-y", `${Math.round(Math.min(y * 0.025, 22))}px`);
-      root.style.setProperty("--hero-panel-y", `${Math.round(Math.max(y * -0.018, -18))}px`);
+      const scrollable = document.body.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      setScrollProgress(Math.min(Math.max(progress, 0), 1));
+      root.style.setProperty("--scroll-progress", `${Math.round(progress * 100)}%`);
+      root.style.setProperty("--mesh-y", `${Math.round(window.scrollY * 0.12)}px`);
+      root.style.setProperty("--mesh-x", `${Math.round(window.scrollY * -0.05)}px`);
+      root.style.setProperty("--hero-drift", `${Math.round(Math.min(window.scrollY * 0.035, 34))}px`);
     };
 
     onScroll();
@@ -26,11 +46,11 @@ function App() {
     if (reduceMotion) return;
 
     const interval = window.setInterval(() => {
-      setActiveSystemIndex((index) => (index + 1) % carouselSystems.length);
-    }, 4600);
+      setActiveSystemIndex((index) => (index + 1) % featuredSystems.length);
+    }, 5200);
 
     return () => window.clearInterval(interval);
-  }, [carouselSystems.length]);
+  }, [featuredSystems.length]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,11 +63,14 @@ function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            const id = entry.target.getAttribute("id");
+            if (id && trackerSections.some((section) => section.id === id)) {
+              setActiveSection(id);
+            }
           }
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+      { rootMargin: "-20% 0px -58% 0px", threshold: 0.1 },
     );
 
     targets.forEach((target) => observer.observe(target));
@@ -59,16 +82,17 @@ function App() {
 
   const goToSystem = (direction: "next" | "previous") => {
     setActiveSystemIndex((index) => {
-      if (direction === "next") return (index + 1) % carouselSystems.length;
-      return (index - 1 + carouselSystems.length) % carouselSystems.length;
+      if (direction === "next") return (index + 1) % featuredSystems.length;
+      return (index - 1 + featuredSystems.length) % featuredSystems.length;
     });
   };
 
   return (
     <main>
+      <div className="page-chrome" aria-hidden="true" />
       <header className="topbar" aria-label="Primary">
         <a className="brand" href="#top" aria-label="Ankit Kumar home">
-          AK
+          <span>AK</span>
         </a>
         <nav>
           <a href="#systems">Systems</a>
@@ -78,9 +102,24 @@ function App() {
         </nav>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-copy" data-reveal>
-          <p className="eyebrow">Infrastructure · DevOps · Solo systems</p>
+      <aside className="scroll-tracker" aria-label="Page sections">
+        <span className="tracker-line" aria-hidden="true" />
+        {trackerSections.map((section) => (
+          <a
+            className={activeSection === section.id ? "active" : ""}
+            href={`#${section.id}`}
+            key={section.id}
+            aria-current={activeSection === section.id ? "location" : undefined}
+          >
+            <span />
+            {section.label}
+          </a>
+        ))}
+      </aside>
+
+      <section className="hero" id="top" data-reveal>
+        <div className="hero-copy">
+          <p className="eyebrow">Infrastructure · DevOps · solo operator</p>
           <h1>{profile.name}</h1>
           <p className="lede">{profile.headline}</p>
           <p className="focus">{profile.focus}</p>
@@ -93,14 +132,29 @@ function App() {
             ))}
           </div>
         </div>
-        <aside className="operator-panel" aria-label="Operator profile summary" data-reveal>
-          <img src="https://github.com/imaddi47.png" alt="Ankit Kumar GitHub avatar" />
-          <div>
-            <p className="panel-label">Operator profile</p>
-            <strong>@{profile.handle}</strong>
-            <span>Cloud tooling, secure admin systems, local-first AI workflows.</span>
+
+        <div className="hero-visual" aria-label="Animated infrastructure graph">
+          <InfraScene scrollProgress={scrollProgress} />
+          <div className="hud-card profile-hud">
+            <img src="https://github.com/imaddi47.png" alt="Ankit Kumar GitHub avatar" />
+            <div>
+              <span>operator</span>
+              <strong>@{profile.handle}</strong>
+            </div>
           </div>
-        </aside>
+          <div className="hud-card status-hud">
+            <span>focus</span>
+            <strong>secure cloud tools</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="command-strip" aria-label="Animated command stream">
+        <div className="ticker">
+          {[...codeLines, ...codeLines].map((line, index) => (
+            <span key={`${line}-${index}`}>{line}</span>
+          ))}
+        </div>
       </section>
 
       <section className="signals" aria-label="Profile signals">
@@ -112,30 +166,31 @@ function App() {
         ))}
       </section>
 
-      <section className="section motion-section" aria-label="Featured systems carousel" data-reveal>
+      <section className="section spotlight-section" aria-label="Featured system scanner" data-reveal>
         <div className="section-heading">
-          <p className="eyebrow">Build queue</p>
-          <h2>Highlighted systems, rotating through the operational proof.</h2>
+          <p className="eyebrow">Live build scanner</p>
+          <h2>Operator-facing systems with audit trails, guarded workflows, and local-first bias.</h2>
         </div>
-        <div className="carousel-shell">
-          <div className="carousel-stage" key={`${activeSystem.title}-stage`}>
+        <div className="scanner-shell">
+          <div className="scanner-visual" key={`${activeSystem.title}-visual`}>
+            <div className="scan-grid" aria-hidden="true" />
             {activeSystem.image ? (
               <img src={activeSystem.image.src} alt={activeSystem.image.alt} />
             ) : (
-              <div className="carousel-diagram" aria-label={`${activeSystem.title} flow`}>
-                <span>Source</span>
-                <span>Control</span>
-                <span>Policy</span>
-                <span>Audit</span>
+              <div className="pipeline-map" aria-label={`${activeSystem.title} pipeline map`}>
+                <span>input</span>
+                <span>control</span>
+                <span>policy</span>
+                <span>audit</span>
               </div>
             )}
           </div>
-          <div className="carousel-copy" key={`${activeSystem.title}-copy`}>
+          <div className="scanner-copy" key={`${activeSystem.title}-copy`}>
             <span>{activeSystem.domain}</span>
             <h3>{activeSystem.title}</h3>
             <p>{activeSystem.summary}</p>
             <ul>
-              {activeSystem.proof.slice(0, 2).map((item) => (
+              {activeSystem.proof.slice(0, 3).map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -143,8 +198,8 @@ function App() {
               <button type="button" aria-label="Previous system" onClick={() => goToSystem("previous")}>
                 &lt;
               </button>
-              <div className="carousel-dots" aria-label="Carousel position">
-                {carouselSystems.map((system, index) => (
+              <div className="carousel-dots" aria-label="Scanner position">
+                {featuredSystems.map((system, index) => (
                   <button
                     type="button"
                     key={system.title}
@@ -163,55 +218,51 @@ function App() {
         </div>
       </section>
 
-      <section className="section" id="systems">
+      <section className="section systems-section" id="systems" data-reveal>
         <div className="section-heading">
-          <p className="eyebrow">Featured systems</p>
-          <h2>Tools for people who operate real infrastructure.</h2>
+          <p className="eyebrow">Case studies</p>
+          <h2>Builds that turn infrastructure pressure into product surfaces.</h2>
         </div>
 
-        <div className="system-grid">
-          {systems.map((system) => (
-            <article className="system-card" key={system.title} data-reveal>
-              <div className="card-head">
-                <span>{system.domain}</span>
-                <small>{system.status}</small>
-              </div>
-              <h3>{system.title}</h3>
-              <p>{system.summary}</p>
-              {system.image ? (
-                <img className="system-image" src={system.image.src} alt={system.image.alt} />
-              ) : (
-                <div className="system-diagram" aria-label={`${system.title} system diagram`}>
-                  <span>Input</span>
-                  <span>Control plane</span>
-                  <span>Audit</span>
+        <div className="system-stack">
+          {systems.map((system, index) => (
+            <article className="system-case" key={system.title} data-reveal>
+              <div className="case-index">0{index + 1}</div>
+              <div className="case-copy">
+                <div className="case-meta">
+                  <span>{system.domain}</span>
+                  <small>{system.status}</small>
                 </div>
-              )}
-              <ul>
-                {system.proof.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <div className="stack-list">
-                {system.stack.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
+                <h3>{system.title}</h3>
+                <p>{system.summary}</p>
+                {system.link ? (
+                  <a className="evidence-link" href={system.link.href}>
+                    {system.link.label}
+                    <span aria-hidden="true">-&gt;</span>
+                  </a>
+                ) : null}
               </div>
-              {system.link ? (
-                <a className="evidence-link" href={system.link.href}>
-                  {system.link.label}
-                  <span aria-hidden="true">-&gt;</span>
-                </a>
-              ) : null}
+              <div className="case-proof">
+                <ul>
+                  {system.proof.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <div className="stack-list">
+                  {system.stack.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section compact-section">
-        <div className="section-heading" data-reveal>
-          <p className="eyebrow">More builds</p>
-          <h2>Smaller surfaces, same operator bias.</h2>
+      <section className="section compact-section" data-reveal>
+        <div className="section-heading">
+          <p className="eyebrow">Side channels</p>
+          <h2>Smaller builds that show the same operating taste.</h2>
         </div>
         <div className="mini-grid">
           {secondarySystems.map((system) => (
@@ -230,26 +281,27 @@ function App() {
         </div>
       </section>
 
-      <section className="section split-section" id="writing">
-        <div className="section-heading sticky-heading" data-reveal>
-          <p className="eyebrow">Writing</p>
-          <h2>Notes from the sharp edges of infra work.</h2>
+      <section className="section split-section" id="writing" data-reveal>
+        <div className="section-heading sticky-heading">
+          <p className="eyebrow">Incident notes</p>
+          <h2>Writing from the sharp edges: Docker, DNS, Cloudflare, migrations, AI tooling.</h2>
         </div>
         <div className="writing-list">
-          {writings.map((writing) => (
+          {writings.map((writing, index) => (
             <a className="writing-row" href={writing.href} key={writing.href} data-reveal>
               <time>{writing.date}</time>
               <strong>{writing.title}</strong>
               <span>{writing.tags.join(" · ")}</span>
+              <em>read_0{index + 1}</em>
             </a>
           ))}
         </div>
       </section>
 
-      <section className="section" id="stack">
-        <div className="section-heading" data-reveal>
-          <p className="eyebrow">Stack</p>
-          <h2>Practical tools, chosen for systems that have to keep running.</h2>
+      <section className="section stack-section" id="stack" data-reveal>
+        <div className="section-heading">
+          <p className="eyebrow">Toolchain</p>
+          <h2>Practical stack choices for systems that need to stay understandable under load.</h2>
         </div>
         <div className="skill-grid">
           {skillGroups.map((group) => (

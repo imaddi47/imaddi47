@@ -1,3 +1,9 @@
 .superpowers/
 .DS_Store
 .worktrees/
+node_modules/
+portfolio/node_modules/
+portfolio/dist/
+portfolio/*.tsbuildinfo
+portfolio/vite.config.js
+portfolio/vite.config.d.ts
