@@ -46,7 +46,7 @@ export function Footer() {
         <Reveal>
           <div className="mt-8 flex flex-col items-start gap-1">
             <LocoClip width={240} height={160} className="-ml-2 opacity-95" />
-            <span className="marginalia text-ink-mute">End of the line — no. 47</span>
+            <span className="marginalia text-ink-mute">End of the line — no. 47 · drag to rotate</span>
           </div>
         </Reveal>
 

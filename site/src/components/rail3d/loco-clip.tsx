@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
@@ -108,12 +109,14 @@ function Locomotive() {
   );
 }
 
-function Turntable({ reduced }: { reduced: boolean }) {
+function Turntable({ reduced, spin }: { reduced: boolean; spin: boolean }) {
   const loco = useRef<THREE.Group>(null);
   const steam = useRef<THREE.Group>(null);
 
+  // On pointer devices, OrbitControls handles rotation (drag + auto-rotate). On
+  // touch (no controls, to keep page scroll), we spin the loco here instead.
   useFrame((state, delta) => {
-    if (loco.current && !reduced) loco.current.rotation.y += delta * 0.55;
+    if (loco.current && spin && !reduced) loco.current.rotation.y += delta * 0.55;
     if (steam.current && !reduced) {
       const t = state.clock.elapsedTime;
       steam.current.children.forEach((m, i) => {
@@ -147,10 +150,15 @@ function Turntable({ reduced }: { reduced: boolean }) {
 
 export function LocoClip({ width = 240, height = 160, className }: { width?: number; height?: number; className?: string }) {
   const reduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine =
+    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
   return (
-    <div className={className} style={{ width, height }}>
+    <div
+      className={className}
+      style={{ width, height, cursor: fine ? "grab" : "default" }}
+      data-cursor={fine ? "hover" : undefined}
+    >
       <Canvas
         frameloop="always"
         dpr={[1, 2]}
@@ -162,7 +170,22 @@ export function LocoClip({ width = 240, height = 160, className }: { width?: num
         <directionalLight position={[40, 60, 50]} intensity={2.6} color="#ffe7c4" />
         <directionalLight position={[-50, 10, -30]} intensity={0.8} color="#9a5a44" />
         <pointLight position={[10, 8, 0]} intensity={50} color={EMBER} distance={120} decay={1.5} />
-        <Turntable reduced={reduced} />
+        <Turntable reduced={reduced} spin={!fine} />
+        {fine && (
+          <OrbitControls
+            makeDefault
+            target={[0, 8, 0]}
+            enablePan={false}
+            enableZoom={false}
+            enableDamping
+            dampingFactor={0.08}
+            rotateSpeed={0.6}
+            autoRotate={!reduced}
+            autoRotateSpeed={1.1}
+            minPolarAngle={Math.PI * 0.22}
+            maxPolarAngle={Math.PI * 0.6}
+          />
+        )}
       </Canvas>
     </div>
   );
