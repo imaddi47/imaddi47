@@ -1,24 +1,40 @@
+<!--
+  This file renders on https://github.com/imaddi47 as the profile readme.
+  Long-form portfolio lives in /site (a Next.js app) and is deployed separately.
+-->
 
-<h1 align="center">Hi 👋, I'm Ankit</h1>  
-<h3 align="center">A passionate software developer from India</h3>  
-  
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=imaddi47&label=Profile%20views&color=0e75b6&style=flat" alt="imaddi47" /> </p>  
-  
-- 💬 Ask me about **bash, javascript, react and postgres**  
-  
-- 📫 How to reach me **imaddi47@duck.com**  
-  
-<h3 align="left">Connect with me:</h3>  
-<p align="left">  
-<a href="https://linkedin.com/in/imaddi47" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="imaddi47" height="30" width="40" /></a>  
-<a href="https://medium.com/@imaddi47" target="blank"><img align="center" src="https://miro.medium.com/v2/5d8de952517e8160e40ef9841c781cdc14a5db313057fa3c3de41c6f5b494b19" alt="@imaddi47" height="30" width="40" /></a>  
-</p>  
-  
-<h3 align="left">Languages and Tools:</h3>  
-<p align="left"> <a href="https://www.cockroachlabs.com/product/cockroachdb/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/cockroachdb.svg" alt="cockroachdb" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://cloud.google.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://golang.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.rabbitmq.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/rabbitmq/rabbitmq-icon.svg" alt="rabbitMQ" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://reactnative.dev/" target="_blank" rel="noreferrer"> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </a> <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/> </a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="40" height="40"/> </a> </p>  
-  
+<h1 align="center">Ankit Kumar</h1>
+<p align="center"><em>Software engineer · India · @ Toddle</em></p>
 
+<p align="center">
+  Tooling for the unglamorous middle of the stack — auth flows, AWS plumbing,
+  AI-augmented workflows. Things that ship at 2 a.m. and quietly hold.
+</p>
 
-![](https://github-readme-stats.vercel.app/api?username=imaddi47&theme=default&hide_border=true&include_all_commits=false&count_private=true)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=imaddi47&theme=default&hide_border=true)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=imaddi47&theme=default&hide_border=true&include_all_commits=false&count_private=true&layout=compact)
+<p align="center">
+  <a href="https://imaddi47.github.io">portfolio</a> ·
+  <a href="https://blog.debugblackbox.com">writing</a> ·
+  <a href="https://github.com/imaddi47?tab=repositories">repositories</a> ·
+  <a href="https://linkedin.com/in/imaddi47">linkedin</a> ·
+  <a href="mailto:imaddi47@duck.com">email</a>
+</p>
+
+---
+
+### Selected work
+
+| | | |
+|---|---|---|
+| [`resume-optimizer`](https://github.com/imaddi47/resume-optimizer) | AI resume tailoring service — FastAPI + Vue 3 + Gemini + LaTeX | `Python` |
+| [`manage-aws-ssm-parameters`](https://github.com/imaddi47/manage-aws-ssm-parameters) | UI for the lifecycle of AWS SSM parameters | `JavaScript` |
+| [`dbverse`](https://github.com/imaddi47/dbverse) | Small abstraction over Postgres / CockroachDB / SQLite | `TypeScript` |
+| [`wireguard-backend`](https://github.com/imaddi47/wireguard-backend) | REST API for WireGuard peer management | `Node.js` |
+| [`3d-globe-animation`](https://github.com/imaddi47/3d-globe-animation) | WebGL sketch — earth, fiber arcs, autorotate | `TypeScript` |
+
+### Reach by frequency
+
+- **Daily** — TypeScript · Node · Postgres · React
+- **Often** — Python · FastAPI · AWS (S3, SSM, Lambda) · Docker
+- **Curious** — Rust · Bun · Deno · Cloudflare Workers
+
+<sub>The full portfolio — with cursor parallax, animated marks, and the field log — lives at <a href="https://imaddi47.github.io">imaddi47.github.io</a>. Source in <code>/site</code>.</sub>
