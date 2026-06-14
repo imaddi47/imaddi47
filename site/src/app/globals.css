@@ -146,6 +146,19 @@ body::after {
 }
 .marquee-track { animation: marquee 60s linear infinite; }
 
+/* Locomotive steam — drifts up and back from the chimney */
+@keyframes rail-steam {
+  0% { transform: translate(0px, 0px) scale(0.5); opacity: 0.22; }
+  100% { transform: translate(-7px, -20px) scale(1.5); opacity: 0; }
+}
+.rail-steam {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rail-steam 2.4s ease-out infinite;
+}
+.rail-steam-2 { animation-delay: 0.8s; }
+.rail-steam-3 { animation-delay: 1.6s; }
+
 .lift { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
 .lift:hover { transform: translateY(-2px); }
 
@@ -154,4 +167,5 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .marquee-track { animation: none; }
+  .rail-steam { animation: none; opacity: 0 !important; }
 }
