@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useRef, type RefObject } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { Locomotive } from "./locomotive";
+import { Tree } from "./tree";
 
 export type SnakeNode = { y: number; x: number };
 export type SnakeStation = { id: string; numeral: string; label: string; y: number; x: number };
@@ -22,9 +23,12 @@ type Props = {
   onSelect: (id: string) => void;
 };
 
-const GAUGE = 24;
-const STEEL = "#39322a";
-const Z_AMP = 14;
+const GAUGE = 32;
+const RAIL_R = 3.1; // thicker rails
+const RAIL_Z = 4; // rails ride above the sleepers
+const RAIL_COLOR = "#e9dfce"; // theme secondary — pale "white" rails
+const SLEEPER_COLOR = "#4a3c29";
+const Z_AMP = 16;
 
 function smoothstep(t: number) {
   const c = Math.max(0, Math.min(1, t));
@@ -72,8 +76,12 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
       point(d + 2, c2);
       const tan = c2.clone().sub(c).normalize();
       const normal = new THREE.Vector3(-tan.y, tan.x, 0).normalize();
-      left.push(c.clone().addScaledVector(normal, GAUGE / 2));
-      right.push(c.clone().addScaledVector(normal, -GAUGE / 2));
+      const lp = c.clone().addScaledVector(normal, GAUGE / 2);
+      const rp = c.clone().addScaledVector(normal, -GAUGE / 2);
+      lp.z += RAIL_Z;
+      rp.z += RAIL_Z;
+      left.push(lp);
+      right.push(rp);
       if (i % 6 === 0) {
         const zAxis = up.clone().addScaledVector(tan, -up.dot(tan)).normalize();
         const m = new THREE.Matrix4().makeBasis(normal, tan, zAxis.lengthSq() ? zAxis : up);
@@ -100,21 +108,37 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
     [],
   );
 
-  useFrame(() => {
+  const camera = useThree((s) => s.camera);
+
+  useFrame((state) => {
     if (world.current) world.current.position.y = (scroll.current ?? 0) + height / 2;
     const g = engine.current;
-    if (!g) return;
     const dE = (progress.current ?? 0) * docHeight;
     point(dE, scratch.c);
     point(dE + 2, scratch.c2);
-    scratch.yA.copy(scratch.c2).sub(scratch.c).normalize();
-    scratch.zA.copy(scratch.up).addScaledVector(scratch.yA, -scratch.up.dot(scratch.yA)).normalize();
-    if (scratch.zA.lengthSq() < 1e-4) scratch.zA.set(0, 0, 1);
-    scratch.xA.crossVectors(scratch.yA, scratch.zA).normalize();
-    scratch.zA.crossVectors(scratch.xA, scratch.yA).normalize();
-    scratch.m.makeBasis(scratch.xA, scratch.yA, scratch.zA);
-    g.quaternion.setFromRotationMatrix(scratch.m);
-    g.position.copy(scratch.c);
+    if (g) {
+      scratch.yA.copy(scratch.c2).sub(scratch.c).normalize();
+      scratch.zA.copy(scratch.up).addScaledVector(scratch.yA, -scratch.up.dot(scratch.yA)).normalize();
+      if (scratch.zA.lengthSq() < 1e-4) scratch.zA.set(0, 0, 1);
+      scratch.xA.crossVectors(scratch.yA, scratch.zA).normalize();
+      scratch.zA.crossVectors(scratch.xA, scratch.yA).normalize();
+      scratch.m.makeBasis(scratch.xA, scratch.yA, scratch.zA);
+      g.quaternion.setFromRotationMatrix(scratch.m);
+      g.position.copy(scratch.c);
+    }
+
+    // Gentle axonometric drift — biased toward the engine's current side so we
+    // catch its profile, plus a slow idle sway. Small angles keep the track
+    // inside its half-column.
+    const t = reduced ? 0 : state.clock.elapsedTime;
+    const bias = THREE.MathUtils.clamp(scratch.c.x / Math.max(1, width * 0.24), -1, 1);
+    const yaw = THREE.MathUtils.degToRad(12 + Math.sin(t * 0.22) * 4 - bias * 7);
+    const pitch = THREE.MathUtils.degToRad(15 + Math.sin(t * 0.17) * 2.5);
+    const D = 1400;
+    const cp = Math.cos(pitch);
+    camera.position.set(Math.sin(yaw) * cp * D, Math.sin(pitch) * D, Math.cos(yaw) * cp * D);
+    camera.up.set(0, 1, 0);
+    camera.lookAt(0, 0, 0);
   });
 
   return (
@@ -132,18 +156,18 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
       <group ref={world}>
         {sleepers.map((s, i) => (
           <mesh key={i} position={s.pos} quaternion={s.quat}>
-            <boxGeometry args={[GAUGE + 12, 4, 3.4]} />
-            <meshStandardMaterial color="#2a2017" metalness={0.2} roughness={0.9} />
+            <boxGeometry args={[GAUGE + 18, 7, 5]} />
+            <meshStandardMaterial color={SLEEPER_COLOR} metalness={0.15} roughness={0.92} />
           </mesh>
         ))}
 
         <mesh>
-          <tubeGeometry args={[leftCurve, Math.min(600, sleepers.length * 6 + 60), 1.7, 8, false]} />
-          <meshStandardMaterial color={STEEL} metalness={0.9} roughness={0.35} envMapIntensity={1.2} />
+          <tubeGeometry args={[leftCurve, Math.min(700, sleepers.length * 6 + 60), RAIL_R, 10, false]} />
+          <meshStandardMaterial color={RAIL_COLOR} metalness={0.45} roughness={0.42} envMapIntensity={1.1} />
         </mesh>
         <mesh>
-          <tubeGeometry args={[rightCurve, Math.min(600, sleepers.length * 6 + 60), 1.7, 8, false]} />
-          <meshStandardMaterial color={STEEL} metalness={0.9} roughness={0.35} envMapIntensity={1.2} />
+          <tubeGeometry args={[rightCurve, Math.min(700, sleepers.length * 6 + 60), RAIL_R, 10, false]} />
+          <meshStandardMaterial color={RAIL_COLOR} metalness={0.45} roughness={0.42} envMapIntensity={1.1} />
         </mesh>
 
         {stations.map((s) => {
@@ -151,6 +175,8 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
           const inward = s.x <= 0 ? 1 : -1; // label points toward page centre
           return (
             <group key={s.id} position={[s.x, -s.y, Z_AMP * Math.sin(s.y * 0.01)]}>
+              {/* a checkpoint tree on the outer side of the line */}
+              <Tree position={[-34 * inward, -GAUGE / 2, 2]} variant={s.label.length % 2} active={active} />
               <mesh position={[14 * inward, 0, 8]}>
                 <cylinderGeometry args={[1.1, 1.1, 26, 8]} />
                 <meshStandardMaterial color="#c8973f" metalness={0.85} roughness={0.4} />
