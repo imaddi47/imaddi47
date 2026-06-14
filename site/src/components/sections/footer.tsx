@@ -89,8 +89,8 @@ export function Footer() {
           </div>
 
           <p className="font-body text-sm text-ink-2 leading-relaxed mt-10">
-            Set in Archivo and Newsreader. Composed with Next.js, Tailwind v4, Motion,
-            three.js and Remotion. Rendered in a single page.
+            Set in Archivo and Newsreader. Composed with Next.js, Tailwind v4, Motion
+            and three.js. Rendered in a single page.
           </p>
           <p className="marginalia text-ink-mute mt-4">
             © 2026 Ankit Kumar. Words are mine. Code on{" "}
