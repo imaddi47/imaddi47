@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  /* Paper palette — warm off-white, ink, single sienna accent */
+  --paper: #f2eee3;
+  --paper-2: #ebe6d8;
+  --paper-3: #e3ddca;
+  --ink: #13110d;
+  --ink-2: #3a352d;
+  --ink-mute: #7e776a;
+  --accent: #b8410e;
+  --accent-soft: #e8c9a8;
+  --rule: rgba(19, 17, 13, 0.1);
+  --rule-strong: rgba(19, 17, 13, 0.22);
+  --highlight: #f5d568;
+
+  --font-display: var(--font-instrument);
+  --font-body: var(--font-newsreader);
+  --font-mono: var(--font-jbmono);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-mute: var(--ink-mute);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-highlight: var(--highlight);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern", "liga", "calt", "onum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Paper grain + warm wash */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle at 25% 15%, rgba(184, 65, 14, 0.05), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(19, 17, 13, 0.04), transparent 35%);
+  mix-blend-mode: multiply;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  font-feature-settings: "liga", "dlig";
+}
+.font-body {
+  font-family: var(--font-body), Georgia, serif;
+}
+.font-mono {
+  font-family: var(--font-mono), "SF Mono", Menlo, monospace;
+  font-feature-settings: "ss01", "ss02", "calt";
+}
+
+.marginalia {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.numeral {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+.rule-strong { border: none; border-top: 1px solid var(--rule-strong); margin: 0; }
+
+.section { position: relative; padding-block: clamp(5rem, 10vw, 9rem); }
+
+.link-underline { position: relative; display: inline-block; }
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+.link-underline:hover::after { transform: scaleX(0); transform-origin: left; }
+
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 5.2em;
+  float: left;
+  line-height: 0.85;
+  padding-right: 0.06em;
+  padding-top: 0.1em;
+  color: var(--accent);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 60s linear infinite; }
+
+.lift { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.lift:hover { transform: translateY(-2px); }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .marquee-track { animation: none; }
+}
