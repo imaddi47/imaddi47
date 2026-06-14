@@ -28,7 +28,7 @@ const jbmono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://imaddi47.github.io"),
+  metadataBase: new URL("https://imaddi47.lonebuilder.com"),
   title: "Ankit Kumar — Software Engineer",
   description:
     "Software engineer at Toddle. Builds tooling for the unglamorous middle of the stack — auth flows, AWS plumbing, AI-augmented workflows.",
