@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Paper palette — warm off-white, ink, single sienna accent */
-  --paper: #f2eee3;
-  --paper-2: #ebe6d8;
-  --paper-3: #e3ddca;
-  --ink: #13110d;
-  --ink-2: #3a352d;
-  --ink-mute: #7e776a;
-  --accent: #b8410e;
-  --accent-soft: #e8c9a8;
-  --rule: rgba(19, 17, 13, 0.1);
-  --rule-strong: rgba(19, 17, 13, 0.22);
-  --highlight: #f5d568;
+  /* Industrial Steam — dark charcoal-coffee, brass + oxblood, lamp glow */
+  --paper: #181410;
+  --paper-2: #201b15;
+  --paper-3: #2a231b;
+  --ink: #ece2d2;
+  --ink-2: #bdae97;
+  --ink-mute: #8a7c66;
+  --accent: #c8973f;
+  --accent-2: #b4472b;
+  --accent-soft: #6c5836;
+  --rule: rgba(236, 226, 210, 0.12);
+  --rule-strong: rgba(236, 226, 210, 0.24);
+  --highlight: #f3c969;
 
   --font-display: var(--font-instrument);
   --font-body: var(--font-newsreader);
@@ -27,6 +28,7 @@
   --color-ink-2: var(--ink-2);
   --color-ink-mute: var(--ink-mute);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
   --color-accent-soft: var(--accent-soft);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
@@ -48,7 +50,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Paper grain + warm wash */
+/* Boiler glow — warm light pooling from the corners, additive on the dark ground */
 body::before {
   content: "";
   position: fixed;
@@ -56,19 +58,21 @@ body::before {
   pointer-events: none;
   z-index: 1;
   background-image:
-    radial-gradient(circle at 25% 15%, rgba(184, 65, 14, 0.05), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(19, 17, 13, 0.04), transparent 35%);
-  mix-blend-mode: multiply;
+    radial-gradient(circle at 22% 12%, rgba(200, 151, 63, 0.1), transparent 42%),
+    radial-gradient(circle at 85% 88%, rgba(180, 71, 43, 0.08), transparent 40%);
+  mix-blend-mode: screen;
 }
 
+/* Soot / film grain */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  opacity: 0.7;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
 }
 
 @media (hover: hover) and (pointer: fine) {

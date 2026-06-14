@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/cursor";
-import { RailJourney } from "@/components/rail-journey";
+import { RailJourney3D } from "@/components/rail3d/rail-journey-3d";
 
 const instrument = Instrument_Serif({
   variable: "--font-instrument",
@@ -53,8 +53,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <Cursor />
-        <RailJourney />
-        <div className="relative z-10 flex flex-col flex-1 lg:pl-[184px]">{children}</div>
+        <RailJourney3D />
+        <div className="relative z-10 flex flex-col flex-1 lg:pl-[208px]">{children}</div>
       </body>
     </html>
   );

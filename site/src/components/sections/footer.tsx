@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { Magnetic } from "@/components/magnetic";
-import { Signature } from "@/components/remotion/signature";
+import { LocoClip } from "@/components/rail3d/loco-clip";
 import { meta } from "@/lib/data";
 
 /** Live IST clock rendered in paper text for the inverted footer. */
@@ -24,7 +24,7 @@ function LocalClock() {
   }, []);
 
   return (
-    <span className="font-mono text-xs uppercase tracking-wider text-paper/80 tabular-nums">
+    <span className="font-mono text-xs uppercase tracking-wider text-ink/80 tabular-nums">
       {time || "—:—"} <span className="opacity-60">IST</span>
     </span>
   );
@@ -48,28 +48,28 @@ const contactLinks: ContactLink[] = [
 
 export function Footer() {
   return (
-    <footer id="colophon" className="relative scroll-mt-24 bg-ink text-paper">
+    <footer id="colophon" className="relative scroll-mt-24 bg-[#0f0b07] text-ink">
       {/* Marquee strip */}
-      <div className="overflow-hidden whitespace-nowrap border-b border-paper/20">
+      <div className="overflow-hidden whitespace-nowrap border-b border-ink/20">
         <div
           className="marquee-track flex"
           style={{ fontSize: "clamp(4rem, 10vw, 8rem)" }}
           aria-hidden="true"
         >
-          <span className="font-display italic text-paper/[0.15] shrink-0 select-none">
+          <span className="font-display italic text-ink/[0.15] shrink-0 select-none">
             {MARQUEE_TEXT}
           </span>
-          <span className="font-display italic text-paper/[0.15] shrink-0 select-none">
+          <span className="font-display italic text-ink/[0.15] shrink-0 select-none">
             {MARQUEE_TEXT}
           </span>
         </div>
       </div>
 
-      {/* Publisher's mark — Remotion animated signature */}
-      <div className="flex items-center justify-center pt-10 md:pt-14 pb-2 border-b border-paper/10">
-        <div className="flex flex-col items-center gap-2">
-          <Signature width={140} height={94} className="opacity-90" />
-          <span className="marginalia text-paper/30">Publisher&rsquo;s mark</span>
+      {/* Publisher's mark — Remotion + three.js locomotive on a turntable */}
+      <div className="flex items-center justify-center pt-8 md:pt-12 pb-2 border-b border-ink/10">
+        <div className="flex flex-col items-center gap-1">
+          <LocoClip width={260} height={170} className="opacity-95" />
+          <span className="marginalia text-ink/30">Publisher&rsquo;s mark — no. 47</span>
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export function Footer() {
           <div className="grid grid-cols-12 gap-x-6 gap-y-16">
             {/* Col 1–5: How to reach */}
             <div className="col-span-12 md:col-span-5">
-              <p className="marginalia text-paper/40 mb-6">REACH</p>
+              <p className="marginalia text-ink/40 mb-6">REACH</p>
               <nav aria-label="Contact links">
                 <ul className="flex flex-col gap-3">
                   {contactLinks.map(({ label, href, external }) => (
@@ -88,7 +88,7 @@ export function Footer() {
                       <Magnetic strength={0.2}>
                         <a
                           href={href}
-                          className="group link-underline flex items-baseline gap-2 font-display italic text-paper hover:text-accent transition-colors duration-300"
+                          className="group link-underline flex items-baseline gap-2 font-display italic text-ink hover:text-accent transition-colors duration-300"
                           style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}
                           data-cursor="hover"
                           {...(external
@@ -109,16 +109,16 @@ export function Footer() {
 
             {/* Col 7–9: Colophon prose */}
             <div className="col-span-12 md:col-start-7 md:col-span-3">
-              <p className="marginalia text-paper/40 mb-6">COLOPHON</p>
-              <p className="font-body text-sm text-paper/80 leading-relaxed mb-6">
+              <p className="marginalia text-ink/40 mb-6">COLOPHON</p>
+              <p className="font-body text-sm text-ink/80 leading-relaxed mb-6">
                 Set in Instrument Serif and Newsreader. Composed with Next.js, Tailwind v4, and
                 Motion. Rendered in a single page. Last typeset June 2026.
               </p>
-              <p className="marginalia text-paper/40">
+              <p className="marginalia text-ink/40">
                 License — © 2026 Ankit Kumar. Words are mine. Code on{" "}
                 <a
                   href={meta.github}
-                  className="link-underline hover:text-paper/80 transition-colors duration-200"
+                  className="link-underline hover:text-ink/80 transition-colors duration-200"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -131,24 +131,24 @@ export function Footer() {
             {/* Col 11–12: Field facts */}
             <div className="col-span-12 md:col-start-11 md:col-span-2 md:text-right">
               <div className="mb-5">
-                <p className="marginalia text-paper/40 mb-1">LOCATION</p>
-                <p className="font-mono text-xs uppercase tracking-wider text-paper/80">
+                <p className="marginalia text-ink/40 mb-1">LOCATION</p>
+                <p className="font-mono text-xs uppercase tracking-wider text-ink/80">
                   Bengaluru · IN
                 </p>
               </div>
               <div>
-                <p className="marginalia text-paper/40 mb-1">LOCAL TIME</p>
+                <p className="marginalia text-ink/40 mb-1">LOCAL TIME</p>
                 <LocalClock />
               </div>
             </div>
           </div>
 
           {/* Bottom rule + meta row */}
-          <div className="mt-16 md:mt-20 border-t border-paper/20 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <span className="marginalia text-paper/40">v1.0.0 — built in a weekend</span>
+          <div className="mt-16 md:mt-20 border-t border-ink/20 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <span className="marginalia text-ink/40">v1.0.0 — built in a weekend</span>
             <a
               href="#top"
-              className="link-underline marginalia text-paper/40 hover:text-paper/80 transition-colors duration-200 self-start sm:self-auto"
+              className="link-underline marginalia text-ink/40 hover:text-ink/80 transition-colors duration-200 self-start sm:self-auto"
               data-cursor="hover"
             >
               ↑ Back to top
