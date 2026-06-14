@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <a href="https://imaddi47.github.io/imaddi47/">
+  <a href="https://imaddi47.lonebuilder.com/">
     <img src="https://img.shields.io/badge/Portfolio-Visit_the_3D_site-C8973F?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Portfolio" />
   </a>
   <a href="https://linkedin.com/in/imaddi47">
@@ -101,7 +101,7 @@ If a project here saved you time, you can fuel the next one. Sponsorships go str
 
 <p align="center">
   <sub>🚂 Full portfolio with a 3D railway that snakes through the page — built with Next.js + three.js.<br/>
-  Live at <a href="https://imaddi47.github.io/imaddi47/">imaddi47.github.io/imaddi47</a> · source in <a href="https://github.com/imaddi47/imaddi47/tree/main/site"><code>/site</code></a>.</sub>
+  Live at <a href="https://imaddi47.lonebuilder.com/">imaddi47.lonebuilder.com</a> · source in <a href="https://github.com/imaddi47/imaddi47/tree/main/site"><code>/site</code></a>.</sub>
 </p>
 
 <p align="center">

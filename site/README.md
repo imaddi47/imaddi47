@@ -1,7 +1,7 @@
 # site — imaddi47 portfolio
 
 A single-page portfolio with a 3D railway that snakes through the content. Lives at
-**[imaddi47.github.io/imaddi47](https://imaddi47.github.io/imaddi47/)**.
+**[imaddi47.lonebuilder.com](https://imaddi47.lonebuilder.com/)**.
 
 ## Stack
 
