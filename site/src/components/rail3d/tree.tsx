@@ -15,29 +15,30 @@ type Props = {
   position?: [number, number, number];
   variant?: number;
   active?: boolean;
+  scale?: number;
 };
 
-export function Tree({ position = [0, 0, 0], variant = 0, active = false }: Props) {
-  const s = variant === 0 ? 1 : 0.88;
+export function Tree({ position = [0, 0, 0], variant = 0, active = false, scale = 1 }: Props) {
+  const s = (variant === 0 ? 1 : 0.9) * scale;
   const lit = active ? FOLIAGE_HI : FOLIAGE;
   return (
     <group position={position} scale={s}>
       {/* trunk — stands along +Y (up the page), perpendicular to the descending track */}
-      <mesh position={[0, 8, 0]}>
-        <cylinderGeometry args={[1.6, 2.2, 18, 8]} />
+      <mesh position={[0, 11, 0]}>
+        <cylinderGeometry args={[2.4, 3.4, 26, 8]} />
         <meshStandardMaterial color={TRUNK} roughness={0.9} metalness={0.05} />
       </mesh>
       {/* stacked foliage cones */}
-      <mesh position={[0, 20, 0]} castShadow>
-        <coneGeometry args={[11, 18, 12]} />
-        <meshStandardMaterial color={lit} roughness={0.85} metalness={0.05} flatShading />
-      </mesh>
       <mesh position={[0, 30, 0]}>
-        <coneGeometry args={[8.5, 15, 12]} />
+        <coneGeometry args={[17, 28, 12]} />
         <meshStandardMaterial color={lit} roughness={0.85} metalness={0.05} flatShading />
       </mesh>
-      <mesh position={[0, 39, 0]}>
-        <coneGeometry args={[6, 12, 12]} />
+      <mesh position={[0, 46, 0]}>
+        <coneGeometry args={[13, 23, 12]} />
+        <meshStandardMaterial color={lit} roughness={0.85} metalness={0.05} flatShading />
+      </mesh>
+      <mesh position={[0, 60, 0]}>
+        <coneGeometry args={[9, 18, 12]} />
         <meshStandardMaterial color={FOLIAGE_HI} roughness={0.85} metalness={0.05} flatShading />
       </mesh>
     </group>
