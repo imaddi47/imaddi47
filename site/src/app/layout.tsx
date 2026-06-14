@@ -54,7 +54,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <Cursor />
         <RailJourney />
-        <div className="relative z-10 flex flex-col flex-1 lg:pl-[92px]">{children}</div>
+        <div className="relative z-10 flex flex-col flex-1 lg:pl-[184px]">{children}</div>
       </body>
     </html>
   );

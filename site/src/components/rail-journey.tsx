@@ -31,11 +31,16 @@ const SECTIONS: { id: string; numeral: string; label: string }[] = [
   { id: "colophon", numeral: "VI", label: "Colophon" },
 ];
 
-const RAIL_W = 92;
-const GAUGE = 15; // distance between the two rails
-const CENTER_X = 46;
-const AMP = 15; // how far the track weaves left/right
+const RAIL_W = 172; // gutter wide enough for the track + station signs
+const GAUGE = 22; // distance between the two rails
+const CENTER_X = 52;
+const AMP = 17; // how far the track weaves left/right
 const WEAVES = 3;
+const AVATAR = "https://avatars.githubusercontent.com/u/77939876?v=4";
+const AVATAR_CY = 52;
+const AVATAR_R = 26;
+const TOP_PAD = 152; // start the track below the depot so the resting engine clears its label
+const BOT_PAD = 56;
 
 function smoothPath(points: Pt[]): string {
   if (points.length < 2) return "";
@@ -94,8 +99,6 @@ export function RailJourney() {
   // Rebuild the centerline path whenever the measured height changes.
   useLayoutEffect(() => {
     if (height <= 0) return;
-    const TOP_PAD = 76; // clear the sticky header; keep the engine fully visible
-    const BOT_PAD = 44;
     const span = Math.max(1, height - TOP_PAD - BOT_PAD);
     const N = 14;
     const pts: Pt[] = [];
@@ -252,7 +255,6 @@ export function RailJourney() {
       className="pointer-events-none fixed left-0 top-0 z-30 hidden h-screen lg:block"
       style={{ width: RAIL_W }}
     >
-      <div className="absolute inset-0 border-r border-rule bg-paper-2/50" />
       <div ref={containerRef} className="absolute inset-0">
         {height > 0 && (
           <svg
@@ -261,9 +263,27 @@ export function RailJourney() {
             viewBox={`0 0 ${RAIL_W} ${height}`}
             fill="none"
             className="absolute inset-0"
+            style={{ overflow: "visible" }}
           >
+            <defs>
+              <clipPath id="rj-avatar-clip">
+                <circle cx={CENTER_X} cy={AVATAR_CY} r={AVATAR_R} />
+              </clipPath>
+            </defs>
+
             {/* hidden measuring centerline (real units) */}
             <path ref={measureRef} d={centerD} stroke="none" fill="none" />
+
+            {/* connector from the depot down to the first rail point */}
+            <line
+              x1={CENTER_X}
+              y1={AVATAR_CY + AVATAR_R + 2}
+              x2={CENTER_X}
+              y2={TOP_PAD}
+              stroke="var(--ink)"
+              strokeOpacity={0.32}
+              strokeWidth={1.4}
+            />
 
             {/* sleepers */}
             {sleepers.map((t, i) => (
@@ -275,21 +295,21 @@ export function RailJourney() {
                 y2={t.b.y}
                 stroke="var(--ink)"
                 strokeOpacity={0.18}
-                strokeWidth={2}
+                strokeWidth={2.4}
                 strokeLinecap="round"
               />
             ))}
 
             {/* the two physical rails */}
-            <path d={leftD} stroke="var(--ink)" strokeOpacity={0.32} strokeWidth={1.4} />
-            <path d={rightD} stroke="var(--ink)" strokeOpacity={0.32} strokeWidth={1.4} />
+            <path d={leftD} stroke="var(--ink)" strokeOpacity={0.32} strokeWidth={1.6} />
+            <path d={rightD} stroke="var(--ink)" strokeOpacity={0.32} strokeWidth={1.6} />
 
             {/* energized (traveled) centerline */}
             <path
               ref={progressRef}
               d={centerD}
               stroke="var(--accent)"
-              strokeWidth={2.4}
+              strokeWidth={2.6}
               strokeLinecap="round"
               pathLength={1}
               strokeDasharray={1}
@@ -297,9 +317,14 @@ export function RailJourney() {
               style={{ transition: "none" }}
             />
 
-            {/* stations */}
+            {/* station signposts */}
             {stations.map((s) => {
+              if (s.id === "top") return null; // the depot medallion is the origin
               const active = s.id === activeId;
+              const px = s.x + 22; // post sits to the right of the rail
+              const boardW = 13 + s.numeral.length * 6;
+              const boardX = px - boardW / 2;
+              const boardY = s.y - 33;
               return (
                 <g
                   key={s.id}
@@ -308,25 +333,64 @@ export function RailJourney() {
                   data-cursor="hover"
                 >
                   {/* hit area */}
-                  <circle cx={s.x} cy={s.y} r={14} fill="transparent" />
+                  <rect x={s.x - 6} y={s.y - 38} width={140} height={48} fill="transparent" />
+                  {/* feeder + post */}
+                  <line x1={s.x} y1={s.y} x2={px} y2={s.y} stroke="var(--ink)" strokeOpacity={0.4} strokeWidth={1.2} />
+                  <line
+                    x1={px}
+                    y1={s.y + 2}
+                    x2={px}
+                    y2={boardY + 13}
+                    stroke={active ? "var(--accent)" : "var(--ink)"}
+                    strokeOpacity={active ? 1 : 0.5}
+                    strokeWidth={1.6}
+                    style={{ transition: "stroke 0.3s ease" }}
+                  />
+                  {/* base plate on the rail */}
                   <circle
                     cx={s.x}
                     cy={s.y}
-                    r={active ? 5.5 : 3.5}
+                    r={3}
                     fill={active ? "var(--accent)" : "var(--paper)"}
                     stroke="var(--ink)"
                     strokeOpacity={active ? 0 : 0.5}
                     strokeWidth={1.2}
-                    style={{ transition: "r 0.3s ease, fill 0.3s ease" }}
+                    style={{ transition: "fill 0.3s ease" }}
+                  />
+                  {/* nameboard */}
+                  <rect
+                    x={boardX}
+                    y={boardY}
+                    width={boardW}
+                    height={14}
+                    rx={2.5}
+                    fill={active ? "var(--accent)" : "var(--paper)"}
+                    stroke="var(--ink)"
+                    strokeOpacity={active ? 0 : 0.45}
+                    strokeWidth={1}
+                    style={{ transition: "fill 0.3s ease" }}
                   />
                   <text
-                    x={s.x + 14}
-                    y={s.y + 3}
+                    x={px}
+                    y={boardY + 10}
+                    textAnchor="middle"
                     fontFamily="var(--font-mono)"
                     fontSize={8.5}
                     letterSpacing={0.5}
+                    fill={active ? "var(--paper)" : "var(--ink)"}
+                    style={{ transition: "fill 0.3s ease" }}
+                  >
+                    {s.numeral}
+                  </text>
+                  {/* station name */}
+                  <text
+                    x={boardX + boardW + 7}
+                    y={boardY + 11}
+                    fontFamily="var(--font-mono)"
+                    fontSize={9.5}
+                    letterSpacing={0.6}
                     fill="var(--ink)"
-                    fillOpacity={active ? 0.85 : 0}
+                    fillOpacity={active ? 0.92 : 0.42}
                     style={{ transition: "fill-opacity 0.3s ease", textTransform: "uppercase" }}
                   >
                     {s.label}
@@ -338,6 +402,48 @@ export function RailJourney() {
             {/* the engine */}
             <g ref={engineRef} style={{ willChange: "transform" }}>
               <Locomotive reduced={reduced} />
+            </g>
+
+            {/* the depot — Ankit's portrait at the head of the line */}
+            <g
+              className="pointer-events-auto cursor-pointer"
+              onClick={() => goTo("top")}
+              data-cursor="hover"
+            >
+              <circle cx={CENTER_X} cy={AVATAR_CY} r={AVATAR_R + 5} fill="var(--paper)" />
+              <image
+                href={AVATAR}
+                x={CENTER_X - AVATAR_R}
+                y={AVATAR_CY - AVATAR_R}
+                width={AVATAR_R * 2}
+                height={AVATAR_R * 2}
+                clipPath="url(#rj-avatar-clip)"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              <circle cx={CENTER_X} cy={AVATAR_CY} r={AVATAR_R} fill="none" stroke="var(--ink)" strokeWidth={1.4} />
+              <circle
+                cx={CENTER_X}
+                cy={AVATAR_CY}
+                r={AVATAR_R + 3.5}
+                fill="none"
+                stroke="var(--accent)"
+                strokeWidth={1.6}
+                strokeOpacity={activeId === "top" ? 1 : 0.45}
+                style={{ transition: "stroke-opacity 0.3s ease" }}
+              />
+              <text
+                x={CENTER_X}
+                y={AVATAR_CY + AVATAR_R + 16}
+                textAnchor="middle"
+                fontFamily="var(--font-mono)"
+                fontSize={9}
+                letterSpacing={1}
+                fill="var(--ink)"
+                fillOpacity={0.7}
+                style={{ textTransform: "uppercase" }}
+              >
+                imaddi47
+              </text>
             </g>
           </svg>
         )}
@@ -351,36 +457,36 @@ function Locomotive({ reduced }: { reduced: boolean }) {
   return (
     <g>
       {/* soft shadow / glow on the rail */}
-      <ellipse cx={0} cy={3} rx={16} ry={25} fill="var(--accent)" opacity={0.09} />
+      <ellipse cx={0} cy={4} rx={22} ry={34} fill="var(--accent)" opacity={0.1} />
 
       {/* steam from the chimney (top, local -y) */}
       {!reduced && (
         <g>
-          <circle className="rail-steam rail-steam-1" cx={0} cy={-20} r={3} fill="var(--ink)" opacity={0.18} />
-          <circle className="rail-steam rail-steam-2" cx={0} cy={-20} r={2.4} fill="var(--ink)" opacity={0.16} />
-          <circle className="rail-steam rail-steam-3" cx={0} cy={-20} r={2} fill="var(--ink)" opacity={0.14} />
+          <circle className="rail-steam rail-steam-1" cx={0} cy={-28} r={4} fill="var(--ink)" opacity={0.2} />
+          <circle className="rail-steam rail-steam-2" cx={0} cy={-28} r={3.2} fill="var(--ink)" opacity={0.17} />
+          <circle className="rail-steam rail-steam-3" cx={0} cy={-28} r={2.6} fill="var(--ink)" opacity={0.15} />
         </g>
       )}
 
       {/* body */}
       <g>
+        {/* wheels (under the chassis) */}
+        <circle cx={-15} cy={-9} r={4} fill="var(--ink-2)" />
+        <circle cx={15} cy={-9} r={4} fill="var(--ink-2)" />
+        <circle cx={-15} cy={12} r={4} fill="var(--ink-2)" />
+        <circle cx={15} cy={12} r={4} fill="var(--ink-2)" />
         {/* chassis */}
-        <rect x={-11} y={-19} width={22} height={38} rx={7} fill="var(--ink)" />
+        <rect x={-15} y={-26} width={30} height={52} rx={9} fill="var(--ink)" />
         {/* roof highlight */}
-        <rect x={-11} y={-19} width={22} height={11} rx={7} fill="var(--ink-2)" />
+        <rect x={-15} y={-26} width={30} height={15} rx={9} fill="var(--ink-2)" />
         {/* chimney */}
-        <rect x={-3} y={-24} width={6} height={6} rx={2} fill="var(--ink)" />
+        <rect x={-4} y={-32} width={8} height={8} rx={2.5} fill="var(--ink)" />
         {/* cab window */}
-        <rect x={-7} y={-11} width={14} height={9} rx={2.5} fill="var(--paper)" opacity={0.94} />
+        <rect x={-10} y={-15} width={20} height={12} rx={3} fill="var(--paper)" opacity={0.94} />
         {/* boiler band */}
-        <rect x={-11} y={2} width={22} height={2.8} fill="var(--accent)" />
+        <rect x={-15} y={3} width={30} height={3.6} fill="var(--accent)" />
         {/* headlamp (front = bottom), glows */}
-        <circle cx={0} cy={15} r={3.4} fill="var(--highlight)" stroke="var(--accent)" strokeWidth={1.4} />
-        {/* wheels */}
-        <circle cx={-11} cy={-6} r={3} fill="var(--ink-2)" />
-        <circle cx={11} cy={-6} r={3} fill="var(--ink-2)" />
-        <circle cx={-11} cy={8} r={3} fill="var(--ink-2)" />
-        <circle cx={11} cy={8} r={3} fill="var(--ink-2)" />
+        <circle cx={0} cy={20} r={4.6} fill="var(--highlight)" stroke="var(--accent)" strokeWidth={1.6} />
       </g>
     </g>
   );
