@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.git
+.github
+*.md
+.DS_Store
+npm-debug.log*
+.vercel

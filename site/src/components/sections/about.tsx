@@ -6,7 +6,7 @@ const STATS: { label: string; value: string; href?: string }[] = [
   { label: "GH joined", value: "2021" },
   { label: "Public repos", value: "22" },
   { label: "Based", value: "Bengaluru" },
-  { label: "Writes at", value: "debugblackbox.com", href: "https://debugblackbox.com" },
+  { label: "Writes at", value: "blog.debugblackbox.com", href: "https://blog.debugblackbox.com" },
 ];
 
 export function About() {
