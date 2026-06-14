@@ -132,8 +132,8 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
     // inside its half-column.
     const t = reduced ? 0 : state.clock.elapsedTime;
     const bias = THREE.MathUtils.clamp(scratch.c.x / Math.max(1, width * 0.24), -1, 1);
-    const yaw = THREE.MathUtils.degToRad(22 + Math.sin(t * 0.22) * 6 - bias * 11);
-    const pitch = THREE.MathUtils.degToRad(27 + Math.sin(t * 0.17) * 4);
+    const yaw = THREE.MathUtils.degToRad(32 + Math.sin(t * 0.22) * 9 - bias * 15);
+    const pitch = THREE.MathUtils.degToRad(36 + Math.sin(t * 0.17) * 6);
     const D = 1400;
     const cp = Math.cos(pitch);
     camera.position.set(Math.sin(yaw) * cp * D, Math.sin(pitch) * D, Math.cos(yaw) * cp * D);
@@ -176,7 +176,7 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
           return (
             <group key={s.id} position={[s.x, -s.y, Z_AMP * Math.sin(s.y * 0.01)]}>
               {/* a checkpoint tree on the outer side of the line */}
-              <Tree position={[-48 * inward, -GAUGE / 2 - 6, 2]} variant={s.label.length % 2} active={active} scale={1.7} />
+              <Tree position={[-58 * inward, -GAUGE / 2 - 10, 2]} variant={s.label.length % 2} active={active} scale={2.2} />
               <mesh position={[14 * inward, 0, 8]}>
                 <cylinderGeometry args={[1.1, 1.1, 26, 8]} />
                 <meshStandardMaterial color="#c8973f" metalness={0.85} roughness={0.4} />
