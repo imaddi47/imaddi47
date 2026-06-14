@@ -15,7 +15,7 @@
   --rule-strong: rgba(236, 226, 210, 0.24);
   --highlight: #f3c969;
 
-  --font-display: var(--font-instrument);
+  --font-display: var(--font-archivo);
   --font-body: var(--font-newsreader);
   --font-mono: var(--font-jbmono);
 }
@@ -88,10 +88,11 @@ body::after {
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
-  font-style: italic;
-  letter-spacing: -0.015em;
-  font-feature-settings: "liga", "dlig";
+  font-family: var(--font-display), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
 }
 .font-body {
   font-family: var(--font-body), Georgia, serif;
@@ -110,8 +111,8 @@ body::after {
 }
 
 .numeral {
-  font-family: var(--font-display);
-  font-style: italic;
+  font-family: var(--font-mono);
+  font-weight: 500;
   color: var(--accent);
 }
 
@@ -135,12 +136,12 @@ body::after {
 
 .dropcap::first-letter {
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 5.2em;
+  font-weight: 800;
+  font-size: 4.4em;
   float: left;
-  line-height: 0.85;
-  padding-right: 0.06em;
-  padding-top: 0.1em;
+  line-height: 0.78;
+  padding-right: 0.08em;
+  padding-top: 0.08em;
   color: var(--accent);
 }
 

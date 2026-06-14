@@ -6,20 +6,35 @@ import { Instruments } from "@/components/sections/instruments";
 import { Writing } from "@/components/sections/writing";
 import { Now } from "@/components/sections/now";
 import { Footer } from "@/components/sections/footer";
+import { SnakeRow } from "@/components/snake-row";
 
 export default function Home() {
   return (
     <>
       <Header />
       <main className="flex-1">
-        <Hero />
-        <About />
-        <Projects />
-        <Instruments />
-        <Writing />
-        <Now />
+        <SnakeRow index={0}>
+          <Hero />
+        </SnakeRow>
+        <SnakeRow index={1}>
+          <About />
+        </SnakeRow>
+        <SnakeRow index={2}>
+          <Projects />
+        </SnakeRow>
+        <SnakeRow index={3}>
+          <Instruments />
+        </SnakeRow>
+        <SnakeRow index={4}>
+          <Writing />
+        </SnakeRow>
+        <SnakeRow index={5}>
+          <Now />
+        </SnakeRow>
       </main>
-      <Footer />
+      <SnakeRow index={6}>
+        <Footer />
+      </SnakeRow>
     </>
   );
 }

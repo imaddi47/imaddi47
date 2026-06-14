@@ -2,15 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Clock } from "./clock";
+import { SNAKE_SECTIONS } from "@/lib/snake";
 
-const sections = [
-  { id: "field-notes", label: "Field Notes", numeral: "I" },
-  { id: "specimens", label: "Specimens", numeral: "II" },
-  { id: "instruments", label: "Instruments", numeral: "III" },
-  { id: "writing", label: "Writing", numeral: "IV" },
-  { id: "now", label: "Now", numeral: "V" },
-  { id: "colophon", label: "Colophon", numeral: "VI" },
-];
+// Skip the cover; the nav lists the readable chapters.
+const sections = SNAKE_SECTIONS.slice(1);
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);

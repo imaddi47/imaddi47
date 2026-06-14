@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Newsreader, JetBrains_Mono } from "next/font/google";
+import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/cursor";
-import { RailJourney3D } from "@/components/rail3d/rail-journey-3d";
+import { SnakeRail } from "@/components/rail3d/snake-rail";
 
-const instrument = Instrument_Serif({
-  variable: "--font-instrument",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["500", "600", "700", "800"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -48,13 +48,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrument.variable} ${newsreader.variable} ${jbmono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${newsreader.variable} ${jbmono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <Cursor />
-        <RailJourney3D />
-        <div className="relative z-10 flex flex-col flex-1 lg:pl-[208px]">{children}</div>
+        {/* The snaking railway lives behind the content, weaving side to side. */}
+        <SnakeRail />
+        <div className="relative z-10 flex flex-col flex-1">{children}</div>
       </body>
     </html>
   );

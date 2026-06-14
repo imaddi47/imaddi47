@@ -1,7 +1,6 @@
 "use client";
 
 import { Reveal } from "@/components/reveal";
-import { Parallax } from "@/components/parallax";
 import { projects, type Project } from "@/lib/data";
 
 function StatusIndicator({ status }: { status: Project["status"] }) {
@@ -28,7 +27,7 @@ function StatusIndicator({ status }: { status: Project["status"] }) {
 
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className="inline-block h-1.5 w-1.5 shrink-0 border border-ink-mute" />
+      <span className="inline-block h-1.5 w-1.5 shrink-0 border border-rule-strong" />
       archived
     </span>
   );
@@ -43,67 +42,42 @@ function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
         rel="noopener noreferrer"
         data-cursor="view"
         data-cursor-text="open"
-        className="group relative block border-t border-rule py-10 md:py-14 transition-colors"
         aria-label={`${project.title} — opens on GitHub`}
+        className="group block border-t border-rule py-8 transition-colors"
       >
-        <div className="grid grid-cols-12 gap-x-6 gap-y-4 items-start">
-          {/* Col 1: Roman numeral */}
-          <div className="col-span-1 pt-1">
+        <div className="flex items-baseline justify-between gap-4">
+          <div className="flex items-baseline gap-3 min-w-0">
             <span
               aria-hidden
-              className="numeral text-[clamp(1.4rem,2.5vw,2rem)] leading-none opacity-50 inline-block transition-all duration-300 group-hover:opacity-100 group-hover:-translate-x-1"
+              className="numeral text-accent opacity-50 transition-opacity duration-300 group-hover:opacity-100 shrink-0"
             >
               {project.index}
             </span>
-          </div>
-
-          {/* Col 2–7: Title + blurb */}
-          <div className="col-span-11 md:col-span-6">
-            <h3
-              className="font-display text-ink leading-[1.1] transition-all duration-300 group-hover:[font-style:italic]"
-              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}
-            >
+            <h3 className="font-display text-ink text-xl leading-tight transition-colors duration-300 group-hover:text-accent">
               {project.title}
+              <span
+                aria-hidden
+                className="ml-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              >
+                →
+              </span>
             </h3>
-            <p className="mt-3 font-body text-ink-2 leading-relaxed max-w-[50ch] text-base">
-              {project.blurb}
-            </p>
           </div>
-
-          {/* Col 8–9: Kind + year */}
-          <div className="hidden md:flex col-span-2 flex-col gap-1 pt-1.5">
-            <span className="marginalia text-ink-mute">{project.meta.kind}</span>
-            <span className="marginalia text-ink-mute">{project.meta.year}</span>
-          </div>
-
-          {/* Col 10–12: Stack + status + arrow */}
-          <div className="hidden md:flex col-span-3 flex-col justify-between h-full gap-3 pt-1.5">
-            <p className="marginalia text-ink-mute leading-loose">
-              {project.meta.stack.join(" · ")}
-            </p>
-            <div className="marginalia text-ink-mute mt-auto">
-              <span className="block mb-0.5 text-ink-mute/60">STATUS</span>
-              <StatusIndicator status={project.status} />
-            </div>
-          </div>
+          <span className="marginalia text-ink-mute shrink-0">{project.meta.year}</span>
         </div>
 
-        {/* Mobile: kind/year/stack/status row */}
-        <div className="md:hidden mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <span className="marginalia">{project.meta.kind}</span>
-          <span className="marginalia">{project.meta.year}</span>
-          <span className="marginalia">{project.meta.stack.join(" · ")}</span>
-          <span className="marginalia">
+        <p className="mt-2 font-body text-ink-2 leading-relaxed text-sm max-w-prose">
+          {project.blurb}
+        </p>
+
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="marginalia text-ink-mute">
+            {project.meta.stack.join(" · ")}
+          </span>
+          <span className="marginalia text-ink-mute">·</span>
+          <span className="marginalia text-ink-mute">
             <StatusIndicator status={project.status} />
           </span>
-        </div>
-
-        {/* Arrow — appears and shifts on hover */}
-        <div
-          aria-hidden
-          className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 text-accent marginalia text-base opacity-0 translate-x-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-2 pointer-events-none select-none"
-        >
-          →
         </div>
       </a>
     </Reveal>
@@ -112,63 +86,36 @@ function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
 
 export function Projects() {
   return (
-    <section
-      id="specimens"
-      className="section relative scroll-mt-24 px-6 md:px-12"
-    >
-      {/* Background decorative numeral */}
-      <Parallax
-        offset={60}
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-      >
-        <div className="absolute -right-[6vw] top-[8vh] select-none">
-          <span
-            aria-hidden
-            className="font-display text-[clamp(18rem,32vw,44rem)] leading-none text-accent/[0.05] tracking-tight"
-          >
-            II
-          </span>
-        </div>
-      </Parallax>
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Section header marginalia row */}
-        <div className="flex items-center justify-between mb-0">
-          <span className="marginalia">§II · Specimens</span>
-          <span className="marginalia">Selected work — 2024 → 2026</span>
-        </div>
+    <section id="specimens" className="section relative scroll-mt-24">
+      <div className="w-full max-w-[640px] px-6 lg:px-10">
+        <span className="marginalia text-ink-mute">§ III · Specimens</span>
         <hr className="rule mt-2" />
 
-        {/* Eyebrow heading */}
         <Reveal delay={0.05}>
-          <h2 className="font-display italic text-ink mt-12 mb-2" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+          <h2 className="font-display text-ink mt-10 mb-2" style={{ fontSize: "clamp(2rem,5vw,3.5rem)" }}>
             Specimens.
           </h2>
-          <p className="font-body italic text-ink-2 text-lg md:text-xl">
+          <p className="font-body text-ink-2 text-base">
             Five working artifacts. Open one to read the receipts.
           </p>
         </Reveal>
 
-        {/* Project entries list */}
-        <div className="relative mt-10">
+        <div className="mt-8">
           {projects.map((project, index) => (
-            <div key={project.id} className="relative">
-              <ProjectEntry project={project} delay={index * 0.1} />
-            </div>
+            <ProjectEntry key={project.id} project={project} delay={index * 0.08} />
           ))}
-          {/* Closing rule after last entry */}
           <hr className="rule" />
         </div>
 
-        {/* Footer link */}
-        <Reveal delay={0.5}>
-          <div className="mt-8">
+        <Reveal delay={0.45}>
+          <div className="mt-6">
             <a
               href="https://github.com/imaddi47?tab=repositories"
-              data-cursor="hover"
-              className="link-underline marginalia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="marginalia text-ink-mute hover:text-accent transition-colors duration-200"
             >
-              All 22 repositories on GitHub →
+              All repositories on GitHub →
             </a>
           </div>
         </Reveal>
