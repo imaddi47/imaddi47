@@ -12,11 +12,6 @@ export const meta = {
   medium: "https://medium.com/@imaddi47",
 };
 
-export const tagline =
-  "Software engineer building tooling for the unglamorous middle of the stack — auth flows, AWS plumbing, AI-augmented workflows. The things that ship at 2 a.m. and quietly hold.";
-
-export const bio = `Five years of shipping production JavaScript, TypeScript, and Python. Currently at Toddle, where the work is mostly Postgres, Node, and the long tail of edge cases that come with serving schools across timezones. Off-hours, I make small developer tools and write about the ones that didn't work.`;
-
 export type Project = {
   id: string;
   index: string; // roman numeral
@@ -27,55 +22,47 @@ export type Project = {
   status: "shipped" | "ongoing" | "archived";
 };
 
+// Featured work — the repos with real, sustained commit history (not one-off
+// experiments). Commit counts as of the last GitHub walk-through.
 export const projects: Project[] = [
   {
-    id: "resume-optimizer",
-    index: "I",
-    title: "Resume Optimizer",
-    blurb:
-      "Open-source AI service that tailors resumes to job descriptions. FastAPI orchestrates Gemini for the rewrite, LaTeX for the typeset, Vue for the upload UI.",
-    meta: { year: "2026", stack: ["FastAPI", "Vue 3", "Gemini", "LaTeX"], kind: "AI / Tooling" },
-    href: "https://github.com/imaddi47/resume-optimizer",
-    status: "ongoing",
-  },
-  {
     id: "ssm-params",
-    index: "II",
+    index: "I",
     title: "Manage AWS SSM Parameters",
     blurb:
-      "A UI for the lifecycle of AWS Systems Manager parameters — list, edit, version, audit. Built because the console is fine and the CLI is faster, but neither is pleasant.",
-    meta: { year: "2026", stack: ["JavaScript", "AWS SDK", "React"], kind: "DevTool" },
+      "A UI for the whole lifecycle of AWS Systems Manager parameters — list, edit, version, audit. Built because the console is fine and the CLI is faster, but neither is pleasant. ~50 commits and an ongoing docs/release effort behind it.",
+    meta: { year: "2026", stack: ["JavaScript", "AWS SSM", "Web UI"], kind: "DevTool" },
     href: "https://github.com/imaddi47/manage-aws-ssm-parameters",
-    status: "shipped",
-  },
-  {
-    id: "dbverse",
-    index: "III",
-    title: "DBverse",
-    blurb:
-      "A small abstraction over Postgres, CockroachDB, and SQLite for projects that outgrow one database and aren't ready for an ORM. Mostly a learning surface for query planners.",
-    meta: { year: "2025", stack: ["TypeScript", "Postgres", "Knex"], kind: "Library" },
-    href: "https://github.com/imaddi47/dbverse",
     status: "ongoing",
   },
   {
-    id: "wireguard-backend",
-    index: "IV",
-    title: "Wireguard Backend",
+    id: "sso-todo",
+    index: "II",
+    title: "SSO Todo",
     blurb:
-      "A REST API for managing WireGuard peers — keys, allowed IPs, QR provisioning. The kind of thing you write once and never have to think about again.",
-    meta: { year: "2025", stack: ["Node.js", "WireGuard", "Linux"], kind: "Infra" },
-    href: "https://github.com/imaddi47/wireguard-backend",
+      "A todo app that exists mostly to get authentication right — SSO plus password login, sessions, the full flow — refined over ~37 commits and shipped in a container.",
+    meta: { year: "2025", stack: ["JavaScript", "SSO / OAuth", "Docker"], kind: "Auth" },
+    href: "https://github.com/imaddi47/sso-todo",
     status: "shipped",
   },
   {
     id: "three-d-globe",
-    index: "V",
+    index: "III",
     title: "3D Globe Animation",
     blurb:
-      "A vibe-coded experiment in WebGL — earth, fiber arcs between coordinates, autorotate. Small, useless, and good.",
-    meta: { year: "2026", stack: ["TypeScript", "Three.js", "WebGL"], kind: "Sketch" },
+      "A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate. A study in graphics, done for the joy of it.",
+    meta: { year: "2026", stack: ["TypeScript", "Three.js", "GLSL"], kind: "WebGL" },
     href: "https://github.com/imaddi47/3d-globe-animation",
+    status: "shipped",
+  },
+  {
+    id: "slack-bot",
+    index: "IV",
+    title: "Slack Bot",
+    blurb:
+      "A Slack bot that absorbs the repetitive team chores — the small automations that save a dozen context switches a day. Dockerized and iterated on over a few weeks.",
+    meta: { year: "2025", stack: ["JavaScript", "Slack API", "Docker"], kind: "Automation" },
+    href: "https://github.com/imaddi47/slack-bot",
     status: "shipped",
   },
 ];
@@ -88,7 +75,7 @@ export const stack = {
 };
 
 export const now = [
-  { label: "Building", text: "Resume Optimizer v2 — adding multi-format export." },
+  { label: "Building", text: "SSM Dojo — docs and a release flow around the AWS SSM parameter manager." },
   { label: "Reading", text: "“Designing Data-Intensive Applications”, Kleppmann." },
   { label: "Listening", text: "Nils Frahm — All Melody. Endlessly." },
   { label: "Learning", text: "Rust, slowly. One small CLI at a time." },

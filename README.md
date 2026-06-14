@@ -1,6 +1,16 @@
 <!--
   This file renders on https://github.com/imaddi47 as the profile README.
   The long-form portfolio (3D railway, built with Next.js + three.js) lives in /site.
+
+  ───────────────────────────────────────────────────────────────────────────
+  MAINTENANCE — keep these fresh (full guide: site/README.md → "Keeping it current")
+    • Featured projects + stats     → the "Selected work" table below
+    • Portfolio content (projects,  → site/src/lib/data.ts  (auto-deploys on push to main)
+      "Now", writings, stack)
+    • Shipped a repo worth showing? → add it to the table here AND site/src/lib/data.ts
+    • Sponsor buttons need setup    → enable GitHub Sponsors + confirm the Buy Me a Coffee
+                                       handle, then update .github/FUNDING.yml
+  ───────────────────────────────────────────────────────────────────────────
 -->
 
 <h1 align="center">Hi, I'm Ankit 👋</h1>
@@ -19,11 +29,11 @@
   <a href="https://imaddi47.github.io/imaddi47/">
     <img src="https://img.shields.io/badge/Portfolio-Visit_the_3D_site-C8973F?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Portfolio" />
   </a>
-  <a href="mailto:imaddi47@duck.com">
-    <img src="https://img.shields.io/badge/Email_me-B4472B?style=for-the-badge&logo=maildotru&logoColor=white" alt="Email" />
-  </a>
   <a href="https://linkedin.com/in/imaddi47">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="mailto:imaddi47@duck.com">
+    <img src="https://img.shields.io/badge/Email_me-B4472B?style=for-the-badge&logo=maildotru&logoColor=white" alt="Email" />
   </a>
   <a href="https://blog.debugblackbox.com">
     <img src="https://img.shields.io/badge/Blog-debugblackbox-1A1A1A?style=for-the-badge&logo=hashnode&logoColor=white" alt="Blog" />
@@ -35,23 +45,29 @@
 
 ---
 
-### 🤝 Let's build something
+### 🤝 Let's build something together
 
-I care about the load-bearing, unglamorous parts of software — and I like working with people who do too.
+**I'm available for collaboration and contract work** — developer tooling, auth & identity, AWS / backend systems, AI-assisted workflows, or shipping a tricky feature end-to-end. I like working with people who care about the load-bearing, unglamorous parts of software.
 
-**I'm open to collaborating on** developer tooling, AI-assisted workflows, and open source — whether that's a side project, a tricky migration, a thoughtful PR on one of the repos below, or just comparing notes over email.
+<p align="center">
+  <a href="https://linkedin.com/in/imaddi47">
+    <img src="https://img.shields.io/badge/Let's_connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect on LinkedIn" />
+  </a>
+</p>
 
-> 📫 **The easiest way to reach me is [email](mailto:imaddi47@duck.com) — I read and reply to every message.** Prefer DMs? I'm on [LinkedIn](https://linkedin.com/in/imaddi47).
+> 💼 **For collaboration & contract work, the best place to reach me is [LinkedIn](https://linkedin.com/in/imaddi47).**
+> For everything else, [email](mailto:imaddi47@duck.com) — I read and reply to every message.
 
 ### 🛠️ Selected work
 
+A few repos with real, continuous commit history (not one-off experiments):
+
 | Project | What it is | Stack |
 |---|---|---|
-| **[resume-optimizer](https://github.com/imaddi47/resume-optimizer)** | AI service that tailors résumés to a job description | `FastAPI` · `Vue 3` · `Gemini` · `LaTeX` |
-| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** | A friendly UI for the lifecycle of AWS SSM parameters | `JavaScript` · `AWS SDK` |
-| **[dbverse](https://github.com/imaddi47/dbverse)** | Small abstraction over Postgres / CockroachDB / SQLite | `TypeScript` · `Postgres` |
-| **[wireguard-backend](https://github.com/imaddi47/wireguard-backend)** | REST API for managing WireGuard peers | `Node.js` · `Linux` |
-| **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL sketch — earth, fiber arcs, autorotate | `TypeScript` · `Three.js` |
+| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | A friendly UI for the full lifecycle of AWS SSM parameters — list, edit, version, audit | `JavaScript` · `AWS SSM` |
+| **[sso-todo](https://github.com/imaddi47/sso-todo)** | A todo app built to get auth right — SSO + password login, sessions, the whole flow (Dockerized) | `JavaScript` · `OAuth` · `Docker` |
+| **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate | `TypeScript` · `Three.js` · `GLSL` |
+| **[slack-bot](https://github.com/imaddi47/slack-bot)** | A Slack bot that absorbs repetitive team chores — small automations that save context switches | `JavaScript` · `Slack API` · `Docker` |
 
 <sub>→ more on the <a href="https://github.com/imaddi47?tab=repositories">repositories</a> tab</sub>
 
@@ -66,6 +82,19 @@ I care about the load-bearing, unglamorous parts of software — and I like work
 <p align="center">
   <img height="165" alt="Ankit's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=imaddi47&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&title_color=C8973F&icon_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
   <img height="165" alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=imaddi47&layout=compact&hide_border=true&title_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
+</p>
+
+### ☕ Support my work
+
+If a project here saved you time, you can fuel the next one. Sponsorships go straight back into building and maintaining open-source tools.
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/imaddi47">
+    <img src="https://img.shields.io/badge/Buy_me_a_coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee" />
+  </a>
+  <a href="https://github.com/sponsors/imaddi47">
+    <img src="https://img.shields.io/badge/Sponsor_on_GitHub-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="GitHub Sponsors" />
+  </a>
 </p>
 
 ---

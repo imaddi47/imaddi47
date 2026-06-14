@@ -1,0 +1,7 @@
+services:
+  portfolio:
+    build: .
+    image: imaddi47-portfolio
+    ports:
+      - "3000:80"
+    restart: unless-stopped
