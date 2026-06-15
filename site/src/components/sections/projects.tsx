@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { projects, type Project } from "@/lib/data";
 
@@ -15,7 +16,6 @@ function StatusIndicator({ status }: { status: Project["status"] }) {
       </span>
     );
   }
-
   if (status === "shipped") {
     return (
       <span className="inline-flex items-center gap-1.5">
@@ -24,7 +24,6 @@ function StatusIndicator({ status }: { status: Project["status"] }) {
       </span>
     );
   }
-
   return (
     <span className="inline-flex items-center gap-1.5">
       <span className="inline-block h-1.5 w-1.5 shrink-0 border border-rule-strong" />
@@ -33,7 +32,40 @@ function StatusIndicator({ status }: { status: Project["status"] }) {
   );
 }
 
+/** Favicon logo with a monogram fallback when the icon can't load. */
+function ProjectLogo({ project }: { project: Project }) {
+  const [failed, setFailed] = useState(false);
+  const initial = (project.title.match(/[A-Za-z0-9]/)?.[0] ?? "•").toUpperCase();
+  const box =
+    "flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-rule bg-paper-2";
+
+  if (!project.logo || failed) {
+    return (
+      <span className={`${box} font-display text-lg text-accent`} aria-hidden>
+        {initial}
+      </span>
+    );
+  }
+  return (
+    <span className={box}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={project.logo}
+        alt=""
+        width={28}
+        height={28}
+        loading="lazy"
+        className="h-7 w-7 object-contain"
+        onError={() => setFailed(true)}
+      />
+    </span>
+  );
+}
+
 function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
+  const linkLabel = project.live
+    ? `${project.title} — opens the live site`
+    : `${project.title} — opens on GitHub`;
   return (
     <Reveal delay={delay}>
       <a
@@ -41,25 +73,20 @@ function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
         target="_blank"
         rel="noopener noreferrer"
         data-cursor="view"
-        data-cursor-text="open"
-        aria-label={`${project.title} — opens on GitHub`}
-        className="group block border-t border-rule py-8 transition-colors"
+        data-cursor-text={project.live ? "visit" : "code"}
+        aria-label={linkLabel}
+        className="group block border-t border-rule py-7 transition-colors"
       >
         <div className="flex items-baseline justify-between gap-4">
-          <div className="flex items-baseline gap-3 min-w-0">
-            <span
-              aria-hidden
-              className="numeral text-accent opacity-50 transition-opacity duration-300 group-hover:opacity-100 shrink-0"
-            >
-              {project.index}
-            </span>
+          <div className="flex items-center gap-3 min-w-0">
+            <ProjectLogo project={project} />
             <h3 className="font-display text-ink text-xl leading-tight transition-colors duration-300 group-hover:text-accent">
               {project.title}
               <span
                 aria-hidden
                 className="ml-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               >
-                →
+                ↗
               </span>
             </h3>
           </div>
@@ -71,12 +98,17 @@ function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
         </p>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="marginalia text-ink-mute">
-            {project.meta.stack.join(" · ")}
-          </span>
+          <span className="marginalia text-ink-mute">{project.meta.stack.join(" · ")}</span>
           <span className="marginalia text-ink-mute">·</span>
           <span className="marginalia text-ink-mute">
-            <StatusIndicator status={project.status} />
+            {project.live ? (
+              <span className="inline-flex items-center gap-1.5 text-accent">
+                <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                live · private
+              </span>
+            ) : (
+              <StatusIndicator status={project.status} />
+            )}
           </span>
         </div>
       </a>
@@ -96,18 +128,18 @@ export function Projects() {
             Specimens.
           </h2>
           <p className="font-body text-ink-2 text-base">
-            Five working artifacts. Open one to read the receipts.
+            Shipped products and open-source tools — visit one.
           </p>
         </Reveal>
 
         <div className="mt-8">
           {projects.map((project, index) => (
-            <ProjectEntry key={project.id} project={project} delay={index * 0.08} />
+            <ProjectEntry key={project.id} project={project} delay={index * 0.07} />
           ))}
           <hr className="rule" />
         </div>
 
-        <Reveal delay={0.45}>
+        <Reveal delay={0.4}>
           <div className="mt-6">
             <a
               href="https://github.com/imaddi47?tab=repositories"
