@@ -8,8 +8,8 @@
     • Portfolio content (projects,  → site/src/lib/data.ts  (auto-deploys on push to main)
       "Now", writings, stack)
     • Shipped a repo worth showing? → add it to the table here AND site/src/lib/data.ts
-    • Sponsor buttons need setup    → enable GitHub Sponsors + confirm the Buy Me a Coffee
-                                       handle, then update .github/FUNDING.yml
+    • Sponsor buttons need setup    → enable GitHub Sponsors (Ko-fi page already at
+                                       ko-fi.com/imaddi47); handles live in .github/FUNDING.yml
   ───────────────────────────────────────────────────────────────────────────
 -->
 
@@ -89,8 +89,8 @@ A few repos with real, continuous commit history (not one-off experiments):
 If a project here saved you time, you can fuel the next one. Sponsorships go straight back into building and maintaining open-source tools.
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/imaddi47">
-    <img src="https://img.shields.io/badge/Buy_me_a_coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee" />
+  <a href="https://ko-fi.com/imaddi47">
+    <img src="https://img.shields.io/badge/Support_on_Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi" />
   </a>
   <a href="https://github.com/sponsors/imaddi47">
     <img src="https://img.shields.io/badge/Sponsor_on_GitHub-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="GitHub Sponsors" />
