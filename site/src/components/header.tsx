@@ -24,20 +24,34 @@ export function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder — home">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo.png"
-          alt="LoneBuilder"
-          width={28}
-          height={28}
-          className="h-7 w-7 shrink-0 rounded-md transition-transform duration-300 group-hover:-rotate-3"
-        />
-        <span className="font-display text-base leading-none tracking-tight">
-          <span className="text-ink">LONE</span><span style={{ color: "#3aa6e6" }}>BUILDER</span>
+      <div className="flex items-center gap-2.5">
+        <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder — home">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="LoneBuilder"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 rounded-md transition-transform duration-300 group-hover:-rotate-3"
+          />
+          <span className="font-display text-base leading-none tracking-tight">
+            <span className="text-ink">LONE</span><span style={{ color: "#3aa6e6" }}>BUILDER</span>
+          </span>
+        </a>
+        <span className="marginalia hidden sm:inline">
+          ·{" "}
+          <a
+            href="https://github.com/imaddi47"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="hover"
+            aria-label="imaddi47 on GitHub"
+            className="text-ink-mute transition-colors hover:text-accent"
+          >
+            imaddi47
+          </a>
         </span>
-        <span className="marginalia hidden sm:inline">· imaddi47</span>
-      </a>
+      </div>
 
       <nav aria-label="Sections" className="hidden md:flex items-center gap-7">
         {sections.map((s) => (
