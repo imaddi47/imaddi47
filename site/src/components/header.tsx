@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Clock } from "./clock";
+import { Logo } from "./logo";
 import { SNAKE_SECTIONS } from "@/lib/snake";
 
 // Skip the cover; the nav lists the readable chapters.
@@ -24,9 +25,11 @@ export function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <a href="#top" className="group flex items-baseline gap-2" data-cursor="hover">
-        <span className="font-display text-xl leading-none text-ink">Ankit</span>
-        <span className="marginalia hidden sm:inline">/ imaddi47</span>
+      <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder — home">
+        <Logo className="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-3" />
+        <span className="font-display text-base leading-none tracking-tight">
+          <span className="text-ink">LONE</span><span style={{ color: "#3aa6e6" }}>BUILDER</span>
+        </span>
       </a>
 
       <nav aria-label="Sections" className="hidden md:flex items-center gap-7">
