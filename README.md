@@ -100,8 +100,7 @@ If a project here saved you time, you can fuel the next one. Sponsorships go str
 ---
 
 <p align="center">
-  <sub>🚂 Full portfolio with a 3D railway that snakes through the page — built with Next.js + three.js.<br/>
-  Live at <a href="https://imaddi47.lonebuilder.com/">imaddi47.lonebuilder.com</a> · source in <a href="https://github.com/imaddi47/imaddi47/tree/main/site"><code>/site</code></a>.</sub>
+  <a href="https://imaddi47.lonebuilder.com/"><b>🌐 imaddi47.lonebuilder.com</b></a>
 </p>
 
 <p align="center">
