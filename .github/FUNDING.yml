@@ -1,5 +1,5 @@
-# Shows a "Sponsor" button on the repo. Confirm/adjust the handles:
+# Shows a "Sponsor" button on the repo.
 #   • GitHub Sponsors must be enabled at https://github.com/sponsors
-#   • Buy Me a Coffee handle must exist at https://buymeacoffee.com/<handle>
+#   • Ko-fi page: https://ko-fi.com/imaddi47
 github: [imaddi47]
-buy_me_a_coffee: imaddi47
+ko_fi: imaddi47
