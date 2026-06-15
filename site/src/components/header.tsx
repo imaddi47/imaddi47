@@ -30,6 +30,7 @@ export function Header() {
         <span className="font-display text-base leading-none tracking-tight">
           <span className="text-ink">LONE</span><span style={{ color: "#3aa6e6" }}>BUILDER</span>
         </span>
+        <span className="marginalia hidden sm:inline">· imaddi47</span>
       </a>
 
       <nav aria-label="Sections" className="hidden md:flex items-center gap-7">
