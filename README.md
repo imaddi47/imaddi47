@@ -60,11 +60,18 @@
 
 ### 🛠️ Selected work
 
-A few repos with real, continuous commit history (not one-off experiments):
+**Products** (live, closed-source):
+
+| | App | What it is | Stack |
+|---|---|---|---|
+| <img src="https://www.google.com/s2/favicons?domain=ssmdojo.com&sz=64" width="18" height="18" /> | **[SSM Dojo](https://ssmdojo.com)** ↗ | Manage AWS SSM parameters end-to-end from a UI — list, edit, version, audit across accounts | `AWS SSM` · `TypeScript` · `SaaS` |
+| <img src="https://www.google.com/s2/favicons?domain=vpn.lonebuilder.com&sz=64" width="18" height="18" /> | **[OpenVPN Manager](https://vpn.lonebuilder.com)** ↗ | Provision & manage OpenVPN servers and peers from a UI | `OpenVPN` · `TypeScript` · `Self-host` |
+
+**Open source** — repos with real, continuous commit history:
 
 | Project | What it is | Stack |
 |---|---|---|
-| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | A friendly UI for the full lifecycle of AWS SSM parameters — list, edit, version, audit | `JavaScript` · `AWS SSM` |
+| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | The open-source core behind SSM Dojo — UI for the SSM parameter lifecycle | `JavaScript` · `AWS SSM` |
 | **[sso-todo](https://github.com/imaddi47/sso-todo)** | A todo app built to get auth right — SSO + password login, sessions, the whole flow (Dockerized) | `JavaScript` · `OAuth` · `Docker` |
 | **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate | `TypeScript` · `Three.js` · `GLSL` |
 | **[slack-bot](https://github.com/imaddi47/slack-bot)** | A Slack bot that absorbs repetitive team chores — small automations that save context switches | `JavaScript` · `Slack API` · `Docker` |
