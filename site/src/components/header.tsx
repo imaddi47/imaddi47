@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Clock } from "./clock";
-import { Logo } from "./logo";
 import { SNAKE_SECTIONS } from "@/lib/snake";
 
 // Skip the cover; the nav lists the readable chapters.
@@ -26,7 +25,14 @@ export function Header() {
       }`}
     >
       <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder — home">
-        <Logo className="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-3" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo.png"
+          alt="LoneBuilder"
+          width={28}
+          height={28}
+          className="h-7 w-7 shrink-0 rounded-md transition-transform duration-300 group-hover:-rotate-3"
+        />
         <span className="font-display text-base leading-none tracking-tight">
           <span className="text-ink">LONE</span><span style={{ color: "#3aa6e6" }}>BUILDER</span>
         </span>
