@@ -34,19 +34,19 @@ export function About() {
         <div className="mt-8 flex flex-col gap-7">
           <Reveal delay={0.15} y={18} duration={0.95}>
             <p className="font-body text-ink text-lg leading-[1.75] dropcap">
-              Five years of shipping production JavaScript, TypeScript, and Python. Currently at Toddle — an education platform — where the work is mostly Postgres, Node, and the long tail of edge cases that come with serving schools across timezones.
+              Five years writing production JavaScript, TypeScript, and Python. I'm at Toddle right now — an education platform — where most days are Postgres, Node, and the pile of edge cases you hit serving schools across a lot of timezones.
             </p>
           </Reveal>
 
           <Reveal delay={0.25} y={18} duration={0.95}>
             <p className="font-body text-ink-2 text-lg leading-[1.75]">
-              Off-hours I make small developer tools and write about the ones that didn't work. Lately that has meant a resume tailoring service that runs Gemini over LaTeX templates, an AWS Systems Manager parameter UI nobody asked for, and a wireguard backend that mostly just sits there doing its job.
+              Off-hours I build small tools and write about the things that break. Lately that's been SSM Dojo (an AWS parameter manager), an OpenVPN manager, and a homelab that keeps finding new ways to fall over — which is usually what the blog ends up being about.
             </p>
           </Reveal>
 
           <Reveal delay={0.35} y={18} duration={0.95}>
             <p className="font-body text-ink-2 text-lg leading-[1.75]">
-              I am partial to boring databases, careful migrations, and the kind of authentication code that survives an incident. I am suspicious of frameworks that solve problems I do not have.
+              I'm partial to boring databases, careful migrations, and auth code that survives an incident. And I'm wary of frameworks that solve problems I don't have.
             </p>
           </Reveal>
         </div>

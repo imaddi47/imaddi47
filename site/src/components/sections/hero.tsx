@@ -48,9 +48,9 @@ export function Hero() {
           {...rise(0.5)}
           className="font-body text-ink-2 mt-8 text-lg leading-relaxed"
         >
-          Software engineer building tooling for the unglamorous middle of the
-          stack — <span className="text-ink">auth flows, AWS plumbing, AI-augmented workflows</span>.
-          The things that ship at 2 a.m. and quietly hold.
+          Software engineer. I build for the unglamorous middle of the
+          stack — <span className="text-ink">auth, AWS plumbing, AI workflows</span> —
+          the stuff that has to hold at 2 a.m.
         </motion.p>
 
         <motion.dl {...rise(0.62)} className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5">

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "sync:projects": "node scripts/sync-projects.mjs",
+    "sync:writing": "node scripts/sync-writing.mjs",
     "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {

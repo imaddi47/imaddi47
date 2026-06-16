@@ -60,16 +60,15 @@ export function Instruments() {
             Instruments.
           </h2>
           <p className="font-body text-ink-2 text-lg">
-            A working inventory — partial, biased, current.
+            A working inventory. Partial and biased, but current.
           </p>
         </Reveal>
 
         <Reveal y={18} duration={0.95} delay={0.15}>
           <p className="font-body text-ink-2 text-base leading-[1.8] mt-8">
-            Tooling is a long conversation with the work. I&rsquo;m not a maximalist about
-            any single language; I&rsquo;m partial to the ones that get out of the way.
-            Postgres has earned its keep many times over. TypeScript is a tax I gladly pay.
-            I read about Rust often and write about it rarely.
+            I&rsquo;m not precious about languages — I lean on whatever gets out of the way.
+            Postgres has earned its keep over and over. TypeScript is a tax I happily pay.
+            And I read about Rust a lot more than I actually write it.
           </p>
         </Reveal>
 
@@ -87,8 +86,7 @@ export function Instruments() {
         <Reveal y={10} duration={0.8} delay={0.2} className="mt-12">
           <hr className="rule mb-4" />
           <p className="marginalia text-ink-mute">
-            Footnote — I also write the occasional Solidity contract. Mostly to learn how
-            Ethereum reorgs ruin your day.
+            Footnote — most of this gets stress-tested on a homelab that&rsquo;s equal parts lab and liability.
           </p>
         </Reveal>
       </div>
