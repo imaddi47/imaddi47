@@ -47,7 +47,7 @@
 
 ### 🤝 Let's build something together
 
-**I'm available for collaboration and contract work** — developer tooling, auth & identity, AWS / backend systems, AI-assisted workflows, or shipping a tricky feature end-to-end. I like working with people who care about the load-bearing, unglamorous parts of software.
+**I'm open to collaboration** — developer tooling, auth & identity, AWS / backend systems, AI-assisted workflows, or shipping a tricky feature end-to-end. I like working with people who care about the load-bearing, unglamorous parts of software.
 
 <p align="center">
   <a href="https://linkedin.com/in/imaddi47">
