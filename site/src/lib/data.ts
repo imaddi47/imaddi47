@@ -14,7 +14,6 @@ export const meta = {
 
 export type Project = {
   id: string;
-  index: string; // roman numeral
   title: string;
   blurb: string;
   meta: { year: string; stack: string[]; kind: string };
@@ -26,12 +25,10 @@ export type Project = {
   logo?: string;
 };
 
-// Featured work — products with a live link first, then the open repos with real,
-// sustained commit history. Logos use each site's favicon (monogram fallback).
-export const projects: Project[] = [
+// Curated live products (closed-source). Edit by hand — these aren't on GitHub.
+const products: Project[] = [
   {
     id: "ssmdojo",
-    index: "I",
     title: "SSM Dojo",
     blurb:
       "The hosted product: manage AWS SSM parameters end-to-end from a clean UI — list, edit, version and audit across accounts. The open-source core lives below.",
@@ -43,7 +40,6 @@ export const projects: Project[] = [
   },
   {
     id: "openvpn-manager",
-    index: "II",
     title: "OpenVPN Manager",
     blurb:
       "Provision and manage OpenVPN servers and peers from a UI — keys, profiles and access, without the config-file archaeology.",
@@ -53,9 +49,14 @@ export const projects: Project[] = [
     live: true,
     status: "ongoing",
   },
+];
+
+// Open-source repos. Run `pnpm sync:projects` to pull the latest from GitHub and
+// paste fresh entries between the markers (the script prints, it won't edit this).
+// <auto:projects>
+const repos: Project[] = [
   {
-    id: "ssm-params",
-    index: "III",
+    id: "manage-aws-ssm-parameters",
     title: "Manage AWS SSM Parameters",
     blurb:
       "The open-source core behind SSM Dojo — a UI for the whole lifecycle of SSM parameters. ~50 commits and an ongoing docs/release effort behind it.",
@@ -64,18 +65,7 @@ export const projects: Project[] = [
     status: "ongoing",
   },
   {
-    id: "sso-todo",
-    index: "IV",
-    title: "SSO Todo",
-    blurb:
-      "A todo app that exists mostly to get authentication right — SSO plus password login, sessions, the full flow — refined over ~37 commits and shipped in a container.",
-    meta: { year: "2025", stack: ["JavaScript", "SSO / OAuth", "Docker"], kind: "Auth" },
-    href: "https://github.com/imaddi47/sso-todo",
-    status: "shipped",
-  },
-  {
     id: "three-d-globe",
-    index: "V",
     title: "3D Globe Animation",
     blurb:
       "A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate. A study in graphics, done for the joy of it.",
@@ -83,17 +73,10 @@ export const projects: Project[] = [
     href: "https://github.com/imaddi47/3d-globe-animation",
     status: "shipped",
   },
-  {
-    id: "slack-bot",
-    index: "VI",
-    title: "Slack Bot",
-    blurb:
-      "A Slack bot that absorbs the repetitive team chores — the small automations that save a dozen context switches a day. Dockerized and iterated on over a few weeks.",
-    meta: { year: "2025", stack: ["JavaScript", "Slack API", "Docker"], kind: "Automation" },
-    href: "https://github.com/imaddi47/slack-bot",
-    status: "shipped",
-  },
 ];
+// </auto:projects>
+
+export const projects: Project[] = [...products, ...repos];
 
 export const stack = {
   daily: ["TypeScript", "Node", "Postgres", "React"],

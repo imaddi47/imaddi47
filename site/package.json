@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:projects": "node scripts/sync-projects.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
