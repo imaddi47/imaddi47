@@ -27,7 +27,7 @@
 
 <p align="center">
   <a href="https://imaddi47.lonebuilder.com/">
-    <img src="https://img.shields.io/badge/Portfolio-Visit_the_3D_site-C8973F?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Portfolio" />
+    <img src="https://img.shields.io/badge/Portfolio-Visit_the_site-C8973F?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Portfolio" />
   </a>
   <a href="https://linkedin.com/in/imaddi47">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
