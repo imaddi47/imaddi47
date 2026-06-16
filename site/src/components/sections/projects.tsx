@@ -64,8 +64,8 @@ function ProjectLogo({ project }: { project: Project }) {
 
 function ProjectEntry({ project, delay }: { project: Project; delay: number }) {
   const linkLabel = project.live
-    ? `${project.title} — opens the live site`
-    : `${project.title} — opens on GitHub`;
+    ? `${project.title}, opens the live site`
+    : `${project.title}, opens on GitHub`;
   return (
     <Reveal delay={delay}>
       <a
@@ -128,7 +128,7 @@ export function Projects() {
             Specimens.
           </h2>
           <p className="font-body text-ink-2 text-base">
-            Shipped products and open-source tools — visit one.
+            Shipped products and open-source tools. Visit one.
           </p>
         </Reveal>
 

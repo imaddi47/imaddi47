@@ -48,15 +48,15 @@ export function Hero() {
           {...rise(0.5)}
           className="font-body text-ink-2 mt-8 text-lg leading-relaxed"
         >
-          Software engineer. I build for the unglamorous middle of the
-          stack — <span className="text-ink">auth, AWS plumbing, AI workflows</span> —
-          the stuff that has to hold at 2 a.m.
+          Software engineer. I build the unglamorous middle of the
+          stack: <span className="text-ink">auth, AWS plumbing, AI workflows</span>.
+          The stuff that has to hold at 2 a.m.
         </motion.p>
 
         <motion.dl {...rise(0.62)} className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5">
           <Meta label="Est." value="Bengaluru, 2021" />
           <Meta label="Field" value="Distributed systems · AI tooling · DevX" />
-          <Meta label="Status" value="At work — Toddle" dot />
+          <Meta label="Status" value="Working at Toddle" dot />
           <Meta label="Coordinates" value="12°58′N 77°35′E" />
         </motion.dl>
 

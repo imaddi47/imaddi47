@@ -29,14 +29,14 @@ const jbmono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://imaddi47.lonebuilder.com"),
-  title: "Ankit Kumar — Software Engineer",
+  title: "Ankit Kumar · Software Engineer",
   description:
-    "Software engineer at Toddle. Builds tooling for the unglamorous middle of the stack — auth flows, AWS plumbing, AI-augmented workflows.",
+    "Software engineer at Toddle. I build the unglamorous middle of the stack: auth, AWS plumbing, AI workflows.",
   authors: [{ name: "Ankit Kumar", url: "https://github.com/imaddi47" }],
   openGraph: {
-    title: "Ankit Kumar — Software Engineer",
+    title: "Ankit Kumar · Software Engineer",
     description:
-      "Software engineer building tooling for the unglamorous middle of the stack.",
+      "Software engineer at Toddle, building auth, AWS, and AI tooling.",
     type: "website",
   },
   twitter: { card: "summary_large_image" },

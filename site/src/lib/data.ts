@@ -31,7 +31,7 @@ const products: Project[] = [
     id: "ssmdojo",
     title: "SSM Dojo",
     blurb:
-      "The hosted product: manage AWS SSM parameters end-to-end from a clean UI — list, edit, version and audit across accounts. The open-source core lives below.",
+      "The hosted product: manage AWS SSM parameters end to end from a clean UI. List, edit, version, and audit across accounts. The open-source core is below.",
     meta: { year: "2026", stack: ["AWS SSM", "TypeScript", "SaaS"], kind: "Product" },
     href: "https://ssmdojo.com",
     logo: "https://www.google.com/s2/favicons?domain=ssmdojo.com&sz=128",
@@ -42,7 +42,7 @@ const products: Project[] = [
     id: "openvpn-manager",
     title: "OpenVPN Manager",
     blurb:
-      "Provision and manage OpenVPN servers and peers from a UI — keys, profiles and access, without the config-file archaeology.",
+      "Provision and manage OpenVPN servers and peers from a UI. Keys, profiles, and access without the usual config-file archaeology.",
     meta: { year: "2026", stack: ["OpenVPN", "TypeScript", "Self-host"], kind: "Product" },
     href: "https://vpn.lonebuilder.com",
     logo: "https://www.google.com/s2/favicons?domain=vpn.lonebuilder.com&sz=128",
@@ -59,7 +59,7 @@ const repos: Project[] = [
     id: "manage-aws-ssm-parameters",
     title: "Manage AWS SSM Parameters",
     blurb:
-      "The open-source core behind SSM Dojo — a UI for the whole lifecycle of SSM parameters. ~50 commits and an ongoing docs/release effort behind it.",
+      "The open-source core behind SSM Dojo: a UI for the whole lifecycle of SSM parameters. About 50 commits in, with ongoing docs and release work.",
     meta: { year: "2026", stack: ["JavaScript", "AWS SSM", "Web UI"], kind: "DevTool" },
     href: "https://github.com/imaddi47/manage-aws-ssm-parameters",
     status: "ongoing",
@@ -68,7 +68,7 @@ const repos: Project[] = [
     id: "three-d-globe",
     title: "3D Globe Animation",
     blurb:
-      "A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate. Built mostly for the fun of it.",
+      "A WebGL globe with hand-written GLSL shaders and fiber arcs between coordinates. It autorotates. I built it mostly for fun.",
     meta: { year: "2026", stack: ["TypeScript", "Three.js", "GLSL"], kind: "WebGL" },
     href: "https://github.com/imaddi47/3d-globe-animation",
     status: "shipped",
@@ -86,30 +86,30 @@ export const stack = {
 };
 
 export const now = [
-  { label: "Building", text: "SSM Dojo — docs and a release flow for the SSM parameter manager." },
-  { label: "Reading", text: "“Designing Data-Intensive Applications”, Kleppmann." },
-  { label: "Listening", text: "Nils Frahm — All Melody, on repeat." },
+  { label: "Building", text: "SSM Dojo: docs and a release flow for the SSM parameter manager." },
+  { label: "Reading", text: "Designing Data-Intensive Applications, by Kleppmann." },
+  { label: "Listening", text: "Nils Frahm, All Melody, on repeat." },
   { label: "Learning", text: "Rust, slowly. One small CLI at a time." },
 ];
 
 // Pulled from the blog feed — refresh with `pnpm sync:writing`.
 export const writings = [
   {
-    title: "I Let an AI Code For Me in a Disposable Docker Box — And It Slapped",
+    title: "I Let an AI Code For Me in a Disposable Docker Box - And It Slapped",
     excerpt:
-      "Running Claude Code in a throwaway Docker box instead of on my laptop — the setup, and why it worked better than I expected.",
+      "Running Claude Code in a throwaway Docker box instead of on my laptop, and why it worked better than I expected.",
     date: "May 2026",
     href: "https://imaddi47.medium.com/i-let-an-ai-code-for-me-in-a-disposable-docker-box-and-it-slapped-dd42ccbd0dba",
   },
   {
-    title: "Docker Desktop Doesn’t Know How to Wait — And It Almost Killed My Homelab",
+    title: "Docker Desktop Doesn’t Know How to Wait - And It Almost Killed My Homelab",
     excerpt:
       "A race condition between Docker Desktop and a slow RAID1 mount that nearly took out my homelab.",
     date: "Apr 2026",
     href: "https://imaddi47.medium.com/docker-desktop-doesnt-know-how-to-wait-and-it-almost-killed-my-homelab-82f307eccae1",
   },
   {
-    title: "Your Router Has the Memory of a Goldfish — Here’s the Fix",
+    title: "Your Router Has the Memory of a Goldfish - Here’s the Fix",
     excerpt:
       "Why ISP routers keep forgetting your DHCP reservations, and how to make them actually stick.",
     date: "Apr 2026",
@@ -118,7 +118,7 @@ export const writings = [
   {
     title: "When Macau Went Dark: How a Blocked CDN IP Led Us to Build a Geographic DNS Failover",
     excerpt:
-      "A blocked CDN IP knocked a client offline in Macau — the war story, and the geo-DNS failover we built to fix it.",
+      "A blocked CDN IP knocked a client offline in Macau. The war story, plus the geo-DNS failover we built to fix it.",
     date: "Mar 2026",
     href: "https://imaddi47.medium.com/when-macau-went-dark-how-a-blocked-cdn-ip-led-us-to-build-a-geographic-dns-failover-992c5e59a5fc",
   },

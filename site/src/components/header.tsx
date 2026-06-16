@@ -25,7 +25,7 @@ export function Header() {
       }`}
     >
       <div className="flex items-center gap-2.5">
-        <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder — home">
+        <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder, home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"

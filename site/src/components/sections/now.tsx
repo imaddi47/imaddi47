@@ -44,7 +44,7 @@ export function Now() {
             <span className="font-display font-black tracking-tight text-accent text-[clamp(1.25rem,2.5vw,1.75rem)]">
               Yours, in production.
             </span>
-            <span className="marginalia">Stamped — June 2026 · from the desk of A.K.</span>
+            <span className="marginalia">Stamped June 2026 · from the desk of A.K.</span>
           </div>
         </Reveal>
       </div>

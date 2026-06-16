@@ -34,13 +34,13 @@ export function About() {
         <div className="mt-8 flex flex-col gap-7">
           <Reveal delay={0.15} y={18} duration={0.95}>
             <p className="font-body text-ink text-lg leading-[1.75] dropcap">
-              Five years writing production JavaScript, TypeScript, and Python. I'm at Toddle right now — an education platform — where most days are Postgres, Node, and the pile of edge cases you hit serving schools across a lot of timezones.
+              Five years writing production JavaScript, TypeScript, and Python. Right now I&rsquo;m at Toddle, an education platform, where most days are Postgres, Node, and the pile of edge cases you hit serving schools across a lot of timezones.
             </p>
           </Reveal>
 
           <Reveal delay={0.25} y={18} duration={0.95}>
             <p className="font-body text-ink-2 text-lg leading-[1.75]">
-              Off-hours I build small tools and write about the things that break. Lately that's been SSM Dojo (an AWS parameter manager), an OpenVPN manager, and a homelab that keeps finding new ways to fall over — which is usually what the blog ends up being about.
+              Off-hours I build small tools and write about the things that break. Lately that's SSM Dojo (an AWS parameter manager), an OpenVPN manager, and a homelab that keeps finding new ways to fall over. That last one is usually what the blog ends up being about.
             </p>
           </Reveal>
 

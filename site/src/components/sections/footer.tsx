@@ -22,7 +22,7 @@ function LocalClock() {
   }, []);
   return (
     <span className="font-mono text-xs uppercase tracking-wider text-ink tabular-nums">
-      {time || "—:—"} <span className="text-ink-mute">IST</span>
+      {time || "--:--"} <span className="text-ink-mute">IST</span>
     </span>
   );
 }
@@ -46,7 +46,7 @@ export function Footer() {
         <Reveal>
           <div className="mt-8 flex flex-col items-start gap-1">
             <LocoClip width={240} height={160} className="-ml-2 opacity-95" />
-            <span className="marginalia text-ink-mute">End of the line — no. 47 · drag to rotate</span>
+            <span className="marginalia text-ink-mute">End of the line. No. 47 · drag to rotate</span>
           </div>
         </Reveal>
 
@@ -101,7 +101,7 @@ export function Footer() {
           </p>
 
           <div className="mt-10 border-t border-rule pt-5 flex items-center justify-between">
-            <span className="marginalia text-ink-mute">v1.0.0 — built in a weekend</span>
+            <span className="marginalia text-ink-mute">v1.0.0 · built in a weekend</span>
             <a href="#top" data-cursor="hover" className="link-underline marginalia text-ink-mute hover:text-accent">
               ↑ Back to top
             </a>

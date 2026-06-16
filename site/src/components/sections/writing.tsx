@@ -21,7 +21,7 @@ export function Writing() {
             From the press.
           </h2>
           <p className="font-body text-ink-2 text-lg">
-            Recent posts — mostly homelab and infra war stories. The rest&rsquo;s on the blog.
+            Recent posts, mostly homelab and infra war stories. The rest&rsquo;s on the blog.
           </p>
         </Reveal>
 

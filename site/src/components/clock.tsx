@@ -21,7 +21,7 @@ export function Clock({ tz = "Asia/Kolkata", label = "IST" }: { tz?: string; lab
 
   return (
     <span className="marginalia tabular-nums">
-      {time || "—:—"} <span className="opacity-60">{label}</span>
+      {time || "--:--"} <span className="opacity-60">{label}</span>
     </span>
   );
 }
