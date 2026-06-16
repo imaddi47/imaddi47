@@ -72,9 +72,7 @@
 | Project | What it is | Stack |
 |---|---|---|
 | **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | The open-source core behind SSM Dojo — UI for the SSM parameter lifecycle | `JavaScript` · `AWS SSM` |
-| **[sso-todo](https://github.com/imaddi47/sso-todo)** | A todo app built to get auth right — SSO + password login, sessions, the whole flow (Dockerized) | `JavaScript` · `OAuth` · `Docker` |
 | **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate | `TypeScript` · `Three.js` · `GLSL` |
-| **[slack-bot](https://github.com/imaddi47/slack-bot)** | A Slack bot that absorbs repetitive team chores — small automations that save context switches | `JavaScript` · `Slack API` · `Docker` |
 
 <sub>→ more on the <a href="https://github.com/imaddi47?tab=repositories">repositories</a> tab</sub>
 
