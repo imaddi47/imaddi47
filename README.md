@@ -36,10 +36,7 @@
     <img src="https://img.shields.io/badge/Email_me-B4472B?style=for-the-badge&logo=maildotru&logoColor=white" alt="Email" />
   </a>
   <a href="https://blog.debugblackbox.com">
-    <img src="https://img.shields.io/badge/Blog-debugblackbox-1A1A1A?style=for-the-badge&logo=hashnode&logoColor=white" alt="Blog" />
-  </a>
-  <a href="https://medium.com/@imaddi47">
-    <img src="https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white" alt="Medium" />
+    <img src="https://img.shields.io/badge/Blog-debugblackbox-1A1A1A?style=for-the-badge&logo=hashnode&logoColor=white" alt="Blog|Medium" />
   </a>
 </p>
 
