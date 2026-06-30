@@ -6,6 +6,7 @@ import { Environment, Lightformer, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { Locomotive } from "./locomotive";
 import { Tree } from "./tree";
+import { Scatter } from "./flora";
 
 export type SnakeNode = { y: number; x: number };
 export type SnakeStation = { id: string; numeral: string; label: string; y: number; x: number };
@@ -29,6 +30,8 @@ const RAIL_Z = 4; // rails ride above the sleepers
 const RAIL_COLOR = "#e9dfce"; // theme secondary — pale "white" rails
 const SLEEPER_COLOR = "#4a3c29";
 const Z_AMP = 16;
+const ENGINE_LEAD = 300; // engine rides ahead of the read line so it's in view from the cover
+const ENGINE_SCALE = 1.55; // a chunkier, more present locomotive
 
 function smoothstep(t: number) {
   const c = Math.max(0, Math.min(1, t));
@@ -113,7 +116,7 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
   useFrame((state) => {
     if (world.current) world.current.position.y = (scroll.current ?? 0) + height / 2;
     const g = engine.current;
-    const dE = (progress.current ?? 0) * docHeight;
+    const dE = Math.min(docHeight, (progress.current ?? 0) * docHeight + ENGINE_LEAD);
     point(dE, scratch.c);
     point(dE + 2, scratch.c2);
     if (g) {
@@ -154,6 +157,9 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
       </Environment>
 
       <group ref={world}>
+        {/* trackside nature, scattered along the line and parallaxing with it */}
+        <Scatter docHeight={docHeight} trackX={trackX} zAmp={Z_AMP} />
+
         {sleepers.map((s, i) => (
           <mesh key={i} position={s.pos} quaternion={s.quat}>
             <boxGeometry args={[GAUGE + 18, 7, 5]} />
@@ -220,7 +226,7 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
           );
         })}
 
-        <group ref={engine}>
+        <group ref={engine} scale={ENGINE_SCALE}>
           <Locomotive progress={progress} reduced={reduced} />
         </group>
       </group>

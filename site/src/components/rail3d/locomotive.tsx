@@ -26,7 +26,8 @@ type Props = {
 const STEAM_COUNT = 7;
 
 export function Locomotive({ progress, reduced }: Props) {
-  const wheels = useRef<THREE.Group>(null);
+  const wheelRefs = useRef<(THREE.Group | null)[]>([]);
+  const roll = useRef(0);
   const firebox = useRef<THREE.PointLight>(null);
   const steam = useRef<THREE.Group>(null);
   const prev = useRef(progress.current ?? 0);
@@ -38,8 +39,9 @@ export function Locomotive({ progress, reduced }: Props) {
     prev.current = p;
     const speed = Math.min(Math.abs(d) * 60, 1); // 0..1 normalized scroll speed
 
-    // wheels roll with travel
-    if (wheels.current) wheels.current.rotation.x -= d * 90;
+    // wheels roll with travel — each spins about its own axle, in place
+    roll.current -= d * 90;
+    for (const w of wheelRefs.current) if (w) w.rotation.x = roll.current;
 
     // firebox breathes, brightens with effort
     if (firebox.current) {
@@ -167,8 +169,8 @@ export function Locomotive({ progress, reduced }: Props) {
         <meshStandardMaterial color={EMBER} emissive={EMBER} emissiveIntensity={1.6} toneMapped={false} />
       </mesh>
 
-      {/* wheels */}
-      <group ref={wheels}>
+      {/* wheels — each in its own group so it spins about its own axle (X) */}
+      <group>
         {[
           [-15, 12],
           [15, 12],
@@ -177,18 +179,20 @@ export function Locomotive({ progress, reduced }: Props) {
           [-15, -20],
           [15, -20],
         ].map(([x, y], i) => (
-          <group key={i} position={[x, y, 2]} rotation={[0, 0, Math.PI / 2]}>
-            <mesh>
+          <group key={i} position={[x, y, 2]} ref={(el) => { wheelRefs.current[i] = el; }}>
+            {/* tyre — axle along X */}
+            <mesh rotation={[0, 0, Math.PI / 2]}>
               <cylinderGeometry args={[6.4, 6.4, 3, 20]} />
               <meshStandardMaterial color={STEEL_DARK} metalness={0.8} roughness={0.4} />
             </mesh>
-            <mesh position={[0, 1.7, 0]}>
+            {/* brass rim on the outer face */}
+            <mesh position={[1.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
               <cylinderGeometry args={[6.6, 6.6, 0.8, 20]} />
               <meshStandardMaterial color={BRASS} metalness={0.95} roughness={0.3} />
             </mesh>
-            {/* spoke bar so rotation is visible */}
+            {/* spoke bar across the face so the roll reads */}
             <mesh>
-              <boxGeometry args={[1.6, 11.5, 3.4]} />
+              <boxGeometry args={[3.4, 11.5, 1.6]} />
               <meshStandardMaterial color={BRASS} metalness={0.9} roughness={0.35} />
             </mesh>
           </group>

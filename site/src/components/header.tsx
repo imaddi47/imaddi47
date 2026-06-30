@@ -21,9 +21,16 @@ export function Header() {
       className={`sticky top-0 z-50 flex items-center justify-between px-6 py-4 transition-all md:px-12 ${
         scrolled
           ? "backdrop-blur-sm bg-paper/80 border-b border-rule"
-          : "bg-transparent border-b border-transparent"
+          : "border-b border-transparent"
       }`}
     >
+      {/* Soft scrim so the railway behind passes *under* the header band rather
+          than bleeding through the bar. Fades out below the bar; the scrolled
+          state layers its own solid backdrop on top of this. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160%] bg-gradient-to-b from-paper via-paper/70 to-transparent"
+      />
       <div className="flex items-center gap-2.5">
         <a href="#top" className="group flex items-center gap-2.5" data-cursor="hover" aria-label="LoneBuilder, home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
