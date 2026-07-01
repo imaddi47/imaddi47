@@ -3,7 +3,7 @@
   The long-form portfolio (3D railway, built with Next.js + three.js) lives in /site.
 
   ───────────────────────────────────────────────────────────────────────────
-  MAINTENANCE — keep these fresh (full guide: site/README.md → "Keeping it current")
+  MAINTENANCE: keep these fresh (full guide: site/README.md, "Keeping it current")
     • Featured projects + stats     → the "Selected work" table below
     • Portfolio content (projects,  → site/src/lib/data.ts  (auto-deploys on push to main)
       "Now", writings, stack)
@@ -20,8 +20,8 @@
 </p>
 
 <p align="center">
-  <i>I build tooling for the unglamorous middle of the stack —<br/>
-  auth flows, AWS plumbing, AI-augmented workflows.<br/>
+  <i>I build tooling for the unglamorous middle of the stack:<br/>
+  auth flows, AWS plumbing, AI-assisted workflows.<br/>
   The things that ship at 2 a.m. and quietly hold.</i>
 </p>
 
@@ -44,7 +44,7 @@
 
 ### 🤝 Let's build something together
 
-**I'm open to collaboration** — developer tooling, auth & identity, AWS / backend systems, AI-assisted workflows, or shipping a tricky feature end-to-end. I like working with people who care about the load-bearing, unglamorous parts of software.
+**I'm open to collaboration** on developer tooling, auth and identity, AWS and backend systems, AI-assisted workflows, or shipping a tricky feature end to end. I like working with people who care about the load-bearing parts of software, the bits that hold everything else up.
 
 <p align="center">
   <a href="https://linkedin.com/in/imaddi47">
@@ -52,8 +52,8 @@
   </a>
 </p>
 
-> 💼 **For collaboration & contract work, the best place to reach me is [LinkedIn](https://linkedin.com/in/imaddi47).**
-> For everything else, [email](mailto:imaddi47@duck.com) — I read and reply to every message.
+> 💼 **For collaboration and contract work, [LinkedIn](https://linkedin.com/in/imaddi47) is the fastest way to reach me.**
+> For anything else, [email](mailto:imaddi47@duck.com) works. I read and reply to every message.
 
 ### 🛠️ Selected work
 
@@ -61,29 +61,37 @@
 
 | | App | What it is | Stack |
 |---|---|---|---|
-| <img src="https://www.google.com/s2/favicons?domain=ssmdojo.com&sz=64" width="18" height="18" /> | **[SSM Dojo](https://ssmdojo.com)** ↗ | Manage AWS SSM parameters end-to-end from a UI — list, edit, version, audit across accounts | `AWS SSM` · `TypeScript` · `SaaS` |
-| <img src="https://www.google.com/s2/favicons?domain=vpn.lonebuilder.com&sz=64" width="18" height="18" /> | **[OpenVPN Manager](https://vpn.lonebuilder.com)** ↗ | Provision & manage OpenVPN servers and peers from a UI | `OpenVPN` · `TypeScript` · `Self-host` |
+| <img src="https://www.google.com/s2/favicons?domain=ssmdojo.com&sz=64" width="18" height="18" /> | **[SSM Dojo](https://ssmdojo.com)** ↗ | Manage AWS SSM parameters across accounts from one UI: list, edit, version, and audit | `AWS SSM` · `TypeScript` · `SaaS` |
+| <img src="https://www.google.com/s2/favicons?domain=vpn.lonebuilder.com&sz=64" width="18" height="18" /> | **[OpenVPN Manager](https://vpn.lonebuilder.com)** ↗ | Provision and manage OpenVPN servers and peers from a UI | `OpenVPN` · `TypeScript` · `Self-host` |
 
-**Open source** — repos with real, continuous commit history:
+**Open source** (repos with real, continuous commit history):
 
 | Project | What it is | Stack |
 |---|---|---|
-| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | The open-source core behind SSM Dojo — UI for the SSM parameter lifecycle | `JavaScript` · `AWS SSM` |
-| **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL globe — hand-written GLSL shaders, fiber arcs between coordinates, autorotate | `TypeScript` · `Three.js` · `GLSL` |
+| **[manage-aws-ssm-parameters](https://github.com/imaddi47/manage-aws-ssm-parameters)** ⭐ | The open-source core behind SSM Dojo: a UI for the SSM parameter lifecycle | `JavaScript` · `AWS SSM` |
+| **[3d-globe-animation](https://github.com/imaddi47/3d-globe-animation)** | A WebGL globe with hand-written GLSL shaders, arcs drawn between coordinates, and autorotate | `TypeScript` · `Three.js` · `GLSL` |
 
 <sub>→ more on the <a href="https://github.com/imaddi47?tab=repositories">repositories</a> tab</sub>
 
 ### 🧰 What I reach for
 
-- **Daily** — TypeScript · Node · Postgres · React
-- **Often** — Python · FastAPI · AWS (S3, SSM, Lambda) · Docker
-- **Curious about** — Rust · Bun · Deno · Cloudflare Workers
+- **Daily**: TypeScript · Node · Postgres · React
+- **Often**: Python · FastAPI · AWS (S3, SSM, Lambda) · Docker
+- **Curious about**: Rust · Bun · Deno · Cloudflare Workers
 
 ### 📊 By the numbers
 
 <p align="center">
-  <img height="165" alt="Ankit's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=imaddi47&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&title_color=C8973F&icon_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
-  <img height="165" alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=imaddi47&layout=compact&hide_border=true&title_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
+  <img alt="Profile views" src="https://komarev.com/ghpvc/?username=imaddi47&label=Profile%20views&color=C8973F&style=flat" />
+</p>
+
+<p align="center">
+  <img height="170" alt="Ankit's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=imaddi47&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&title_color=C8973F&icon_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
+  <img height="170" alt="GitHub streak" src="https://streak-stats.demolab.com/?user=imaddi47&hide_border=true&background=00000000&ring=C8973F&fire=B4472B&currStreakLabel=C8973F&currStreakNum=ECE2D2&sideLabels=9b9b9b&sideNums=ECE2D2&dates=6b6b6b&stroke=9b9b9b" />
+</p>
+
+<p align="center">
+  <img height="170" alt="Most-used languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=imaddi47&layout=compact&hide_border=true&langs_count=8&title_color=C8973F&text_color=9b9b9b&bg_color=00000000" />
 </p>
 
 ### ☕ Support my work
@@ -106,5 +114,5 @@ If a project here saved you time, you can fuel the next one. Sponsorships go str
 </p>
 
 <p align="center">
-  <sub>Thanks for stopping by — say hi. 👋</sub>
+  <sub>Thanks for stopping by. Say hi. 👋</sub>
 </p>
