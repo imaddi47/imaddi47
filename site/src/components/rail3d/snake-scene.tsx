@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, type RefObject } from "react";
+import { useLayoutEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -41,6 +41,7 @@ function smoothstep(t: number) {
 export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, progress, activeId, reduced, onSelect }: Props) {
   const world = useRef<THREE.Group>(null);
   const engine = useRef<THREE.Group>(null);
+  const sleeperRef = useRef<THREE.InstancedMesh>(null);
 
   // trackX(docY): smooth alternation between the side nodes.
   const trackX = useMemo(() => {
@@ -98,6 +99,18 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
     };
   }, [point, docHeight]);
 
+  // Push every sleeper into one instanced mesh — one draw call for the whole ladder.
+  useLayoutEffect(() => {
+    const mesh = sleeperRef.current;
+    if (!mesh) return;
+    const one = new THREE.Vector3(1, 1, 1);
+    for (let i = 0; i < sleepers.length; i++) {
+      mesh.setMatrixAt(i, new THREE.Matrix4().compose(sleepers[i].pos, sleepers[i].quat, one));
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+    mesh.computeBoundingSphere();
+  }, [sleepers]);
+
   const scratch = useMemo(
     () => ({
       c: new THREE.Vector3(),
@@ -146,10 +159,8 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
 
   return (
     <>
-      <ambientLight intensity={0.62} color="#6a5236" />
-      <directionalLight position={[-80, 120, 160]} intensity={2.2} color="#ffe7c4" />
-      <directionalLight position={[120, -80, 60]} intensity={0.7} color="#9a5a44" />
-      <pointLight position={[60, 40, 140]} intensity={180} color="#ffeccb" distance={700} decay={1.3} />
+      <ambientLight intensity={0.7} color="#6a5236" />
+      <directionalLight position={[-80, 120, 160]} intensity={2.4} color="#ffe7c4" />
       <Environment resolution={64}>
         <Lightformer intensity={1.5} color="#ffd9a0" position={[-60, 60, 80]} scale={[80, 160, 1]} />
         <Lightformer intensity={0.5} color="#b4472b" position={[70, -40, 50]} scale={[70, 110, 1]} />
@@ -160,19 +171,17 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
         {/* trackside nature, scattered along the line and parallaxing with it */}
         <Scatter docHeight={docHeight} trackX={trackX} zAmp={Z_AMP} />
 
-        {sleepers.map((s, i) => (
-          <mesh key={i} position={s.pos} quaternion={s.quat}>
-            <boxGeometry args={[GAUGE + 18, 7, 5]} />
-            <meshStandardMaterial color={SLEEPER_COLOR} metalness={0.15} roughness={0.92} />
-          </mesh>
-        ))}
+        <instancedMesh ref={sleeperRef} args={[undefined, undefined, Math.max(1, sleepers.length)]}>
+          <boxGeometry args={[GAUGE + 18, 7, 5]} />
+          <meshStandardMaterial color={SLEEPER_COLOR} metalness={0.15} roughness={0.92} />
+        </instancedMesh>
 
         <mesh>
-          <tubeGeometry args={[leftCurve, Math.min(700, sleepers.length * 6 + 60), RAIL_R, 10, false]} />
+          <tubeGeometry args={[leftCurve, Math.min(340, sleepers.length * 4 + 40), RAIL_R, 8, false]} />
           <meshStandardMaterial color={RAIL_COLOR} metalness={0.45} roughness={0.42} envMapIntensity={1.1} />
         </mesh>
         <mesh>
-          <tubeGeometry args={[rightCurve, Math.min(700, sleepers.length * 6 + 60), RAIL_R, 10, false]} />
+          <tubeGeometry args={[rightCurve, Math.min(340, sleepers.length * 4 + 40), RAIL_R, 8, false]} />
           <meshStandardMaterial color={RAIL_COLOR} metalness={0.45} roughness={0.42} envMapIntensity={1.1} />
         </mesh>
 
