@@ -30,6 +30,8 @@ export function SnakeRail() {
   const progress = useRef(0);
   const raf = useRef(0);
   const stationsRef = useRef<SnakeStation[]>([]);
+  // Cached by measure() on every resize — avoids a forced reflow in the hot scroll handler.
+  const scrollableRef = useRef(1);
 
   useEffect(() => {
     stationsRef.current = stations;
@@ -55,6 +57,7 @@ export function SnakeRail() {
     const w = window.innerWidth;
     const h = window.innerHeight;
     const doc = document.documentElement.scrollHeight;
+    scrollableRef.current = Math.max(1, doc - h);
     setDims({ w, h, doc });
 
     const ampX = clamp(w * 0.24, 130, 360);
@@ -91,11 +94,9 @@ export function SnakeRail() {
 
   useEffect(() => {
     if (!on) return;
+    // Only React state (activeId) is deferred — no layout read needed here.
     const update = () => {
       raf.current = 0;
-      const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      scroll.current = window.scrollY;
-      progress.current = clamp(window.scrollY / scrollable);
       const list = stationsRef.current;
       let id = list[0]?.id ?? "top";
       const mid = window.scrollY + window.innerHeight / 2;
@@ -103,10 +104,16 @@ export function SnakeRail() {
       setActiveId((p) => (p === id ? p : id));
     };
     const onScroll = () => {
+      // Sync update: Three.js useFrame runs later this same rAF frame and reads fresh values.
+      scroll.current = window.scrollY;
+      progress.current = clamp(window.scrollY / scrollableRef.current);
       if (raf.current) return;
       raf.current = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Seed refs before first render.
+    scroll.current = window.scrollY;
+    progress.current = clamp(window.scrollY / scrollableRef.current);
     update();
     return () => {
       window.removeEventListener("scroll", onScroll);
