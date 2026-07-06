@@ -26,12 +26,11 @@ export function SnakeRail() {
   // Resolution scales itself down if the GPU can't keep up (helps weak/integrated GPUs).
   const [dpr, setDpr] = useState(1.25);
 
+  // Shared with SnakeScene: it samples window.scrollY into these each frame.
   const scroll = useRef(0);
   const progress = useRef(0);
   const raf = useRef(0);
   const stationsRef = useRef<SnakeStation[]>([]);
-  // Cached by measure() on every resize — avoids a forced reflow in the hot scroll handler.
-  const scrollableRef = useRef(1);
 
   useEffect(() => {
     stationsRef.current = stations;
@@ -57,7 +56,6 @@ export function SnakeRail() {
     const w = window.innerWidth;
     const h = window.innerHeight;
     const doc = document.documentElement.scrollHeight;
-    scrollableRef.current = Math.max(1, doc - h);
     setDims({ w, h, doc });
 
     const ampX = clamp(w * 0.24, 130, 360);
@@ -94,7 +92,9 @@ export function SnakeRail() {
 
   useEffect(() => {
     if (!on) return;
-    // Only React state (activeId) is deferred — no layout read needed here.
+    // The 3D world/engine track scroll inside SnakeScene's render loop (freshest
+    // possible). This handler only maintains the active nav highlight — React
+    // state that doesn't need to be frame-perfect, so it's rAF-throttled.
     const update = () => {
       raf.current = 0;
       const list = stationsRef.current;
@@ -104,16 +104,10 @@ export function SnakeRail() {
       setActiveId((p) => (p === id ? p : id));
     };
     const onScroll = () => {
-      // Sync update: Three.js useFrame runs later this same rAF frame and reads fresh values.
-      scroll.current = window.scrollY;
-      progress.current = clamp(window.scrollY / scrollableRef.current);
       if (raf.current) return;
       raf.current = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    // Seed refs before first render.
-    scroll.current = window.scrollY;
-    progress.current = clamp(window.scrollY / scrollableRef.current);
     update();
     return () => {
       window.removeEventListener("scroll", onScroll);
