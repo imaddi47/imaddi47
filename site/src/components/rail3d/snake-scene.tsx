@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, type RefObject } from "react";
+import { memo, useLayoutEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -37,6 +37,70 @@ function smoothstep(t: number) {
   const c = Math.max(0, Math.min(1, t));
   return c * c * (3 - 2 * c);
 }
+
+/**
+ * One checkpoint on the line: a tree, a signal lamp, and a clickable label.
+ * Memoised on `active` so a scroll that changes the active station only
+ * re-renders the two stations whose state flipped — the other labels' drei
+ * `Html` portals stay mounted instead of reconciling every frame, which is
+ * what kept the scroll feeling janky.
+ */
+const Station = memo(function Station({
+  station,
+  active,
+  onSelect,
+}: {
+  station: SnakeStation;
+  active: boolean;
+  onSelect: (id: string) => void;
+}) {
+  const inward = station.x <= 0 ? 1 : -1; // label points toward page centre
+  return (
+    <group position={[station.x, -station.y, Z_AMP * Math.sin(station.y * 0.01)]}>
+      {/* a checkpoint tree on the outer side of the line */}
+      <Tree position={[-58 * inward, -GAUGE / 2 - 10, 2]} variant={station.label.length % 2} active={active} scale={2.2} />
+      <mesh position={[14 * inward, 0, 8]}>
+        <cylinderGeometry args={[1.1, 1.1, 26, 8]} />
+        <meshStandardMaterial color="#c8973f" metalness={0.85} roughness={0.4} />
+      </mesh>
+      <mesh position={[14 * inward, 13, 8]}>
+        <sphereGeometry args={[2.6, 12, 12]} />
+        <meshStandardMaterial
+          color={active ? "#ffd27a" : "#6c5836"}
+          emissive={active ? "#ffb347" : "#000000"}
+          emissiveIntensity={active ? 2.4 : 0}
+          toneMapped={false}
+        />
+      </mesh>
+      <Html position={[22 * inward, 0, 8]} style={{ pointerEvents: "auto" }}>
+        <button
+          onClick={() => onSelect(station.id)}
+          data-cursor="hover"
+          className="flex items-center gap-2 whitespace-nowrap bg-transparent border-0 p-0 cursor-pointer"
+          style={{ transform: `translate(${inward < 0 ? "-100%" : "0"}, -50%)` }}
+        >
+          <span
+            className="font-mono"
+            style={{
+              fontSize: 10, letterSpacing: 0.5, padding: "2px 6px", borderRadius: 3,
+              color: active ? "var(--paper)" : "var(--ink)",
+              background: active ? "var(--accent)" : "transparent",
+              border: active ? "none" : "1px solid var(--rule-strong)",
+            }}
+          >
+            {station.numeral}
+          </span>
+          <span
+            className="font-mono uppercase"
+            style={{ fontSize: 10, letterSpacing: 0.8, color: "var(--ink)", opacity: active ? 0.92 : 0.4 }}
+          >
+            {station.label}
+          </span>
+        </button>
+      </Html>
+    </group>
+  );
+});
 
 export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, progress, activeId, reduced, onSelect }: Props) {
   const world = useRef<THREE.Group>(null);
@@ -127,9 +191,16 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
   const camera = useThree((s) => s.camera);
 
   useFrame((state) => {
-    if (world.current) world.current.position.y = (scroll.current ?? 0) + height / 2;
+    // Sample scroll at render time — the freshest value, matching exactly what
+    // the compositor is painting this frame. Writing the refs here (this runs
+    // before the child Locomotive's own useFrame) keeps the engine in lockstep.
+    const scrollY = window.scrollY;
+    scroll.current = scrollY;
+    progress.current = Math.max(0, Math.min(1, scrollY / Math.max(1, docHeight - height)));
+
+    if (world.current) world.current.position.y = scrollY + height / 2;
     const g = engine.current;
-    const dE = Math.min(docHeight, (progress.current ?? 0) * docHeight + ENGINE_LEAD);
+    const dE = Math.min(docHeight, progress.current * docHeight + ENGINE_LEAD);
     point(dE, scratch.c);
     point(dE + 2, scratch.c2);
     if (g) {
@@ -185,55 +256,9 @@ export function SnakeScene({ width, height, docHeight, nodes, stations, scroll, 
           <meshStandardMaterial color={RAIL_COLOR} metalness={0.45} roughness={0.42} envMapIntensity={1.1} />
         </mesh>
 
-        {stations.map((s) => {
-          const active = s.id === activeId;
-          const inward = s.x <= 0 ? 1 : -1; // label points toward page centre
-          return (
-            <group key={s.id} position={[s.x, -s.y, Z_AMP * Math.sin(s.y * 0.01)]}>
-              {/* a checkpoint tree on the outer side of the line */}
-              <Tree position={[-58 * inward, -GAUGE / 2 - 10, 2]} variant={s.label.length % 2} active={active} scale={2.2} />
-              <mesh position={[14 * inward, 0, 8]}>
-                <cylinderGeometry args={[1.1, 1.1, 26, 8]} />
-                <meshStandardMaterial color="#c8973f" metalness={0.85} roughness={0.4} />
-              </mesh>
-              <mesh position={[14 * inward, 13, 8]}>
-                <sphereGeometry args={[2.6, 12, 12]} />
-                <meshStandardMaterial
-                  color={active ? "#ffd27a" : "#6c5836"}
-                  emissive={active ? "#ffb347" : "#000000"}
-                  emissiveIntensity={active ? 2.4 : 0}
-                  toneMapped={false}
-                />
-              </mesh>
-              <Html position={[22 * inward, 0, 8]} style={{ pointerEvents: "auto" }}>
-                <button
-                  onClick={() => onSelect(s.id)}
-                  data-cursor="hover"
-                  className="flex items-center gap-2 whitespace-nowrap bg-transparent border-0 p-0 cursor-pointer"
-                  style={{ transform: `translate(${inward < 0 ? "-100%" : "0"}, -50%)` }}
-                >
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: 10, letterSpacing: 0.5, padding: "2px 6px", borderRadius: 3,
-                      color: active ? "var(--paper)" : "var(--ink)",
-                      background: active ? "var(--accent)" : "transparent",
-                      border: active ? "none" : "1px solid var(--rule-strong)",
-                    }}
-                  >
-                    {s.numeral}
-                  </span>
-                  <span
-                    className="font-mono uppercase"
-                    style={{ fontSize: 10, letterSpacing: 0.8, color: "var(--ink)", opacity: active ? 0.92 : 0.4 }}
-                  >
-                    {s.label}
-                  </span>
-                </button>
-              </Html>
-            </group>
-          );
-        })}
+        {stations.map((s) => (
+          <Station key={s.id} station={s} active={s.id === activeId} onSelect={onSelect} />
+        ))}
 
         <group ref={engine} scale={ENGINE_SCALE}>
           <Locomotive progress={progress} reduced={reduced} />
