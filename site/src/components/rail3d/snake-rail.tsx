@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import { PerformanceMonitor } from "@react-three/drei";
 import { SnakeScene, type SnakeNode, type SnakeStation } from "./snake-scene";
 import { SNAKE_SECTIONS, trainSide } from "@/lib/snake";
 
@@ -22,6 +23,8 @@ export function SnakeRail() {
   const [stations, setStations] = useState<SnakeStation[]>([]);
   const [activeId, setActiveId] = useState("top");
   const [reduced, setReduced] = useState(false);
+  // Resolution scales itself down if the GPU can't keep up (helps weak/integrated GPUs).
+  const [dpr, setDpr] = useState(1.25);
 
   const scroll = useRef(0);
   const progress = useRef(0);
@@ -122,22 +125,30 @@ export function SnakeRail() {
       <Canvas
         orthographic
         camera={{ position: [0, 0, 320], zoom: 1, near: 0.1, far: 3000 }}
-        dpr={[1, 2]}
+        dpr={dpr}
+        performance={{ min: 0.5 }}
         gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
         style={{ background: "transparent" }}
       >
-        <SnakeScene
-          width={dims.w}
-          height={dims.h}
-          docHeight={dims.doc}
-          nodes={nodes}
-          stations={stations}
-          scroll={scroll}
-          progress={progress}
-          activeId={activeId}
-          reduced={reduced}
-          onSelect={goTo}
-        />
+        <PerformanceMonitor
+          onIncline={() => setDpr(1.5)}
+          onDecline={() => setDpr(1)}
+          flipflops={3}
+          onFallback={() => setDpr(1)}
+        >
+          <SnakeScene
+            width={dims.w}
+            height={dims.h}
+            docHeight={dims.doc}
+            nodes={nodes}
+            stations={stations}
+            scroll={scroll}
+            progress={progress}
+            activeId={activeId}
+            reduced={reduced}
+            onSelect={goTo}
+          />
+        </PerformanceMonitor>
       </Canvas>
     </div>
   );
