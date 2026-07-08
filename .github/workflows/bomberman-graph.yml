@@ -1,0 +1,45 @@
+name: Bomberman contribution graph
+
+# Generates an animated Bomberman SVG from the @imaddi47 contribution grid
+# (via abozanona/pacman-contribution-graph) and commits it to the
+# `bomberman-graph` branch. The README embeds the raw SVG from that branch:
+#   https://raw.githubusercontent.com/imaddi47/imaddi47/bomberman-graph/bomberman-contribution-graph.svg
+#
+# Mirrors the kanakkholwal/pacman profile pattern, swapped to the bomberman game.
+
+on:
+  schedule:
+    # Twice a week — Tuesdays and Fridays at 00:00 UTC.
+    - cron: "0 0 * * 2,5"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/bomberman-graph.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bomberman-graph
+  cancel-in-progress: true
+
+jobs:
+  bomberman_graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate bomberman contribution graph
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          games: bomberman
+
+      - name: Commit SVG to bomberman-graph branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: bomberman-graph
+          build_dir: dist
+          keep_history: false
+          jekyll: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
