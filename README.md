@@ -101,7 +101,7 @@ If a project here saved you time, you can fuel the next one. Sponsorships go str
 
 <p align="center">
   <a href="https://ko-fi.com/imaddi47">
-    <img src="https://img.shields.io/badge/Support_on_Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi" />
+    <img src="https://img.shields.io/badge/Buy_me_coffee-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi" />
   </a>
   <a href="https://github.com/sponsors/imaddi47">
     <img src="https://img.shields.io/badge/Sponsor_on_GitHub-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="GitHub Sponsors" />
